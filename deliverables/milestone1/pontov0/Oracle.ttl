@@ -1,0 +1,21 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# oracle services in the Polkadot Ecosystem
+
+ponto:Oracle a owl:Class ;
+    rdfs:label "Oracle" ;
+    rdfs:comment "Component that provides external data to smart contracts and decentralized applications (dApps) on the Polkadot network." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:DataFeed a owl:Class ;
+    rdfs:label "Data Feed" ;
+    rdfs:comment "A source of external data used by an oracle to provide data to a blockchain." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Query a owl:Class ;
+    rdfs:label "Query" ;
+    rdfs:comment "A request for external data made by a smart contract or other component of a blockchain ecosystem." ;
+    rdfs:subClassOf ponto:Component .

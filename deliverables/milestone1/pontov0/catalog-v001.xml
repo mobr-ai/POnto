@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Wallet.ttl" uri="Wallet.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Transaction.ttl" uri="Transaction.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Tooling.ttl" uri="Tooling.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Token.ttl" uri="Token.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Stake.ttl" uri="Stake.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/RBox.ttl" uri="RBox.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Oracle.ttl" uri="Oracle.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Ledger.ttl" uri="Ledger.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Governance.ttl" uri="Governance.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Consensus.ttl" uri="Consensus.ttl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base=""/>
+</catalog>

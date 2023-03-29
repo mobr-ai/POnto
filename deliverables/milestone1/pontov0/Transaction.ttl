@@ -1,0 +1,64 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# transactions in the Polkadot Ecosystem
+
+ponto:Transaction a rdfs:Class ;
+    rdfs:label "Transaction" ;
+    rdfs:comment "A transaction in the Polkadot blockchain, representing the transfer of assets between two parties." ;
+    rdfs:subClassOf ponto:LedgerRecord .
+
+ponto:Sender a rdfs:Class ;
+    rdfs:label "Sender" ;
+    rdfs:comment "The entity sending assets in a Polkadot blockchain transaction." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:Recipient a rdfs:Class ;
+    rdfs:label "Recipient" ;
+    rdfs:comment "The entity receiving assets in a Polkadot blockchain transaction." ;
+    rdfs:subClassOf ponto:Account .
+
+# properties
+ponto:amountTransferred a rdfs:DatatypeProperty ;
+    rdfs:label "Amount Transferred" ;
+    rdfs:comment "The amount of assets transferred in a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range xsd:decimal .
+
+ponto:typeOfAsset a rdfs:DatatypeProperty ;
+    rdfs:label "Type of Asset" ;
+    rdfs:comment "The type of asset transferred in a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range xsd:string .
+
+ponto:uniqueID a rdfs:DatatypeProperty ;
+    rdfs:label "Unique Identification Number" ;
+    rdfs:comment "The unique identification number of a record in the Polkadot blockchain." ;
+    rdfs:domain ponto:Record ;
+    rdfs:range xsd:string .
+
+ponto:hasRecord a rdfs:ObjectProperty ;
+    rdfs:label "Has Record" ;
+    rdfs:comment "The record associated with a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:Record .
+
+ponto:hasSender a rdfs:ObjectProperty ;
+    rdfs:label "Has Sender" ;
+    rdfs:comment "The sender of a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:Sender .
+
+ponto:hasRecipient a rdfs:ObjectProperty ;
+    rdfs:label "Has Recipient" ;
+    rdfs:comment "The recipient of a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:Recipient .
+
+ponto:belongsToBlock a owl:ObjectProperty ;
+    rdfs:label "Belongs to Block" ;
+    rdfs:comment "The block where the transaction is recorded" ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:Block .

@@ -1,0 +1,53 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Tokens and related subjects like account entity in the Polkadot Ecosystem
+
+# tokens
+ponto:Token a owl:Class ;
+    rdfs:label "Token" ;
+    rdfs:comment "A unit of value that is used to represent assets on a blockchain." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:NativeToken a owl:Class ;
+    rdfs:label "Native Token" ;
+    rdfs:comment "The primary token used as the currency in a blockchain ecosystem, typically issued by the blockchain protocol itself." ;
+    rdfs:subClassOf ponto:Token .
+
+# account types
+
+ponto:Account a owl:Class ;
+    rdfs:label "Account" ;
+    rdfs:comment "An address or a record on the blockchain that is used to store and manage cryptocurrency holdings or other types of assets." ;
+    rdfs:subclasses ponto:LedgerRecord .
+
+ponto:ExternalAccount a owl:Class ;
+    rdfs:label "External Account" ;
+    rdfs:comment "An account that is controlled by an external system, such as an exchange or custodian." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:NodeAccount a owl:Class ;
+    rdfs:label "Node Account" ;
+    rdfs:comment "An account that is used by a node to participate in block production or validation." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:SmartContract a owl:Class ;
+    rdfs:label "Smart Contract" ;
+    rdfs:comment "A self-executing contract that is stored on the blockchain and can interact with other contracts or accounts." ;
+    rdfs:subClassOf ponto:Account .
+
+# relationships
+ponto:hasAccount rdfs:domain ponto:Node ;
+    rdfs:range ponto:Account .
+
+ponto:hasAccount owl:inverseOf ponto:isAccountOf .
+
+ponto:hasToken rdfs:domain ponto:Account ;
+    rdfs:range ponto:Token .
+
+ponto:hasToken owl:inverseOf ponto:belongsTo .
+
+ponto:isNativeToken rdfs:domain ponto:Token ;
+    rdfs:range ponto:NativeToken .

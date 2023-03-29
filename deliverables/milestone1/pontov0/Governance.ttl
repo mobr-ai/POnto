@@ -1,0 +1,29 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# governance in the Polkadot Ecosystem
+ponto:GovernanceComponent a owl:Class ;
+    rdfs:label "Governance component" ;
+    rdfs:comment "A technology component that is part of the governance mechanism in the Polkadot ecosystem." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Treasury a owl:Class ;
+    rdfs:label "Treasury" ;
+    rdfs:comment "A pool of funds that is used to support the development and maintenance of the Polkadot ecosystem." ;
+    rdfs:subClassOf ponto:GovernanceComponent .
+
+ponto:Governance a owl:Class ;
+    rdfs:label "Governance" ;
+    rdfs:comment "The process by which decisions are made about the rules and policies that govern a blockchain ecosystem." ;
+    rdfs:subClassOf ponto:GovernanceComponent .
+
+ponto:Council a owl:Class ;
+    rdfs:label "Council" ;
+    rdfs:comment "A group of stakeholders who are responsible for making decisions about the direction of a blockchain ecosystem." ;
+    rdfs:subClassOf ponto:GovernanceComponent .
+
+#properties and relationships
+ponto:hasGovernanceCouncil rdfs:domain ponto:Governance ;
+    rdfs:range ponto:Council .

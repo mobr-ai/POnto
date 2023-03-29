@@ -1,0 +1,70 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# distributed and decentralized ledgers that are part of or related to the Polkadot Ecosystem
+
+ponto:Polkadot a owl:Class ;
+    rdfs:label "Polkadot" ;
+    rdfs:comment "A blockchain protocol that allows multiple chains to interoperate." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Kusama a owl:Class ;
+    rdfs:label "Kusama" ;
+    rdfs:comment "A canary network for Polkadot that tests new features and upgrades." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Westend a owl:Class ;
+    rdfs:label "Westend" ;
+    rdfs:comment "A Polkadot test network used for experimentation and development." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Westmint a owl:Class ;
+    rdfs:label "Westmint" ;
+    rdfs:comment "A Polkadot test network used for experimentation and development." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Rococo a owl:Class ;
+    rdfs:label "Rococo" ;
+    rdfs:comment "A Polkadot test network used for experimentation and development." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Statemint a owl:Class ;
+    rdfs:label "Statemint" ;
+    rdfs:comment "A blockchain built using Substrate, the same technology used to build Polkadot." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Statemine a owl:Class ;
+    rdfs:label "Statemine" ;
+    rdfs:comment "A blockchain built using Substrate, the same technology used to build Polkadot." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Moonbeam a owl:Class ;
+    rdfs:label "Moonbeam" ;
+    rdfs:comment "A smart contract platform that brings Ethereum-compatible functionality to Polkadot." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Astar a owl:Class ;
+    rdfs:label "Astar" ;
+    rdfs:comment "A blockchain platform that allows developers to build and deploy their own blockchains." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Acala a owl:Class ;
+    rdfs:label "Acala" ;
+    rdfs:comment "A DeFi hub for Polkadot that provides a stablecoin, decentralized exchange, and other financial services." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Phala a owl:Class ;
+    rdfs:label "Phala" ;
+    rdfs:comment "A privacy-preserving computing platform for Polkadot that allows developers to build secure and scalable applications." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+# relationships
+ponto:implements rdf:type rdf:Property ;
+    rdfs:domain ponto:PolkadotArchitecture ;
+    rdfs:range ponto:Polkadot .
+
+ponto:implements rdf:type rdf:Property ;
+    rdfs:domain ponto:PolkadotArchitecture ;
+    rdfs:range ponto:Kusama .

@@ -1,0 +1,71 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# consensus mechanisms in the Polkadot Ecosystem
+ponto:ConsensusMechanism a owl:Class ;
+    rdfs:label "Consensus Mechanism" ;
+    rdfs:comment "The mechanism by which nodes on a distributed ledger agree on a set of valid transactions and blocks." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:ProofOfStake a owl:Class ;
+    rdfs:label "Proof of Stake" ;
+    rdfs:comment "A consensus mechanism in which validators are chosen based on the amount of stake they hold in the network." ;
+    rdfs:subClassOf ponto:ConsensusMechanism .
+
+ponto:Grandpa a owl:Class ;
+    rdfs:label "GRANDPA" ;
+    rdfs:comment "GRANDPA (GHOST-based Recursive Ancestor Deriving Prefix Agreement) is a proof-of-stake consensus mechanism used in the Polkadot ecosystem" ;
+    rdfs:subClassOf ponto:ProofOfStake .
+
+ponto:Nominator a owl:Class ;
+    rdfs:label "Nominator" ;
+    rdfs:comment "An account holder who participates in the proof-of-stake consensus mechanism by nominating validators through stake delegations." ;
+    rdfs:subClassOf ponto:StakeHolder .
+
+
+# relationships
+ponto:hasValidator rdfs:domain ponto:Collator ;
+    rdfs:range ponto:Validator .
+
+ponto:hasNominator rdfs:domain ponto:StakeHolder ;
+    rdfs:range ponto:Nominator .
+
+ponto:isConsensusMechanism rdfs:domain ponto:PolkadotArchitecture ;
+    rdfs:range ponto:ConsensusMechanism .
+
+ponto:proposesBlock a rdf:Property ;
+    rdfs:domain ponto:Validator ;
+    rdfs:range ponto:Transaction ;
+    rdfs:comment "A Validator node that proposes a block in the Polkadot network." .
+
+ponto:nominates a rdf:Property ;
+    rdfs:domain ponto:Nominator ;
+    rdfs:range ponto:Validator ;
+    rdfs:comment "A Nominator nominates a validator in the Polkadot network." .
+
+ponto:validatesBlock a rdf:Property ;
+    rdfs:domain ponto:Validator ;
+    rdfs:range ponto:Transaction ;
+    rdfs:comment "A Validator node that validates a block in the Polkadot network." .
+
+ponto:validatesTransaction a rdf:Property ;
+    rdfs:domain ponto:Validator ;
+        rdfs:range ponto:Transaction ;
+    rdfs:comment "A Validator node that validates a transaction." .
+
+ponto:buildsBlock a rdf:Property ;
+    rdfs:domain ponto:Collator ;
+    rdfs:range ponto:Transaction ;
+    rdfs:comment "A Collator node that builds a block for a specific parachain." .
+
+ponto:collectsTransaction a rdf:Property ;
+    rdfs:domain ponto:Collator ;
+    rdfs:range ponto:Transaction ;
+    rdfs:comment "A Collator node that collects transactions for a specific parachain." .
+
+ponto:usesProofOfStake a rdf:Property ;
+    rdfs:domain ponto:ProofOfStake ;
+    rdfs:range ponto:Validator ;
+    rdfs:comment "A Validator that participates in the ProofOfStake consensus mechanism." .

@@ -1,0 +1,116 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# rules and constraints for the entities in the Polkadot Ecosystem
+
+#StakeHolder must have at least 1 valid stake
+# ponto:StakeHolder rdfs:subClassOf [
+#         owl:onProperty ponto:hasStake ;
+#         owl:minCardinality "1"^^xsd:int
+#     ] .
+
+#Constraint: A node must belong to at least one ledger
+[
+    a owl:AllDisjointClasses ;
+    owl:members (
+        ponto:Node
+        [
+            owl:intersectionOf (
+                [ owl:unionOf ( ponto:RelayChain ponto:DistributedLedger ) ]
+                [ owl:complementOf [ owl:oneOf ( owl:Thing ) ] ]
+            )
+        ]
+    )
+] .
+
+#Rule: A parachain can only be connected to one relay chain
+[
+    a owl:AllDisjointProperties ;
+    owl:members (
+        [
+            owl:inverseOf ponto:connectsParachain ;
+            owl:propertyChainAxiom ( ponto:Bridge ponto:connectsParachain )
+        ]
+        [
+            owl:propertyChainAxiom ( ponto:connectsTo ponto:connectsParachain )
+        ]
+    )
+] .
+
+#Rule: An account must belong to at least one node
+[
+    a owl:AllDisjointProperties ;
+    owl:members (
+        [
+            owl:inverseOf ponto:hasAccount ;
+            owl:propertyChainAxiom ( ponto:belongsTo ponto:hasAccount )
+        ]
+        [
+            owl:propertyChainAxiom ( ponto:hasAccount ponto:belongsTo )
+        ]
+    )
+] .
+
+#Rule: A validator node must have at least one nominator stake holder
+[
+    a owl:AllDisjointProperties ;
+    owl:members (
+        [
+            owl:inverseOf ponto:hasValidator ;
+            owl:propertyChainAxiom ( ponto:hasNominator ponto:hasValidator )
+        ]
+        [
+            owl:propertyChainAxiom ( ponto:hasValidator ponto:hasNominator )
+        ]
+    )
+] .
+
+#Constraint: A governance council must have at least 1 and at most 100 members
+[
+    a owl:AllDisjointClasses ;
+    owl:members (
+        [
+            rdfs:subClassOf ponto:Council ;
+            owl:minQualifiedCardinality "1"^^xsd:int ;
+            owl:onProperty ponto:hasStakeHolder ;
+            owl:onClass ponto:StakeHolder
+        ]
+        [
+            rdfs:subClassOf ponto:Council ;
+            owl:maxQualifiedCardinality "100"^^xsd:int ;
+            owl:onProperty ponto:hasStakeHolder ;
+            owl:onClass ponto:StakeHolder
+        ]
+    )
+] .
+
+
+# # a collator node can only propose one block
+# ponto:Collator ponto:proposesBlock exactly 1 xsd:decimal .
+
+# # validator node can only validate one block.
+# ponto:Validator ponto:validatesBlock exactly 1 xsd:decimal .
+
+# # when a collator node proposes a new block, the validators of that block must validate the transactions within the block
+# { ?x ponto:proposesBlock ?y } => { ?y ponto:validatesTransaction ?z } .
+
+# # when a validator validates a block, they must validate the transactions within that block as well.
+# { ?x ponto:validatesBlock ?y } => { ?y ponto:validatesTransaction ?z } .
+
+# # A Validator node must hold a certain amount of stake to participate in block production
+# { ?node rdf:type ponto:Validator .
+#   ?node ponto:hasStake ?stake .
+#   FILTER(?stake >= 1000) } => { ?node ponto:usesProofOfStake ponto:ProofOfStake } .
+
+# # A Collator node must be assigned to a specific parachain
+# { ?node rdf:type ponto:Collator .
+#   ?node ponto:belongsToParachain ?parachain } => { ?node ponto:buildsBlock ?block } .
+
+# # A StakeHolder can only belong to one StakePool
+# # preventing a single holder from dominating multiple pools and potentially compromising the network's security.
+# { ?holder rdf:type ponto:StakeHolder .
+#   ?holder ponto:belongsToPool ?pool1 .
+#   ?holder ponto:belongsToPool ?pool2 .
+#   FILTER(?pool1 != ?pool2) } => { false } .
