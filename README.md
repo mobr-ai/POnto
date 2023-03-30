@@ -1,2 +1,6 @@
-# POnto
-A blockchain ontology for the Polkadot ecosystem
+# POnto - An ontology for the Polkadot multichain ecosystem
+POnto is a Polkadot ontology designed to represent and relate the main entities of the ecosystem. Besides being a contraction of Polkadot Ontology, "POnto" has inspiration on the meaning of the word *ponto* in Portuguese, which can be translated to both point and *dot*.
+
+Aiming at a better organization and support for evolution, POnto was designed in a modular fashion, using different modules that describe the various aspects of the Polkadot system. POnto entities have labels describing the symbolic name of the entity along with a brief description of its purpose and characteristics. 
+
+Currently there are eleven modules. The main module describes the basic concepts of system and distributed ledger architectures. The other modules group concepts for the Polkadot Ecosystem components: consensus, governance, ledger, oracle, stake, token, tooling, transaction, and wallet. There is also a module to state the ecosystem rules and constraints, called RBox, which is a common terminology used to name a container of rule descriptions. Each module is a separate ontology that is imported into the main module using the owl:imports property. The following sections detail these modules.
