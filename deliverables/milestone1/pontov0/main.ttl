@@ -42,8 +42,8 @@
 <http://www.mobr.ai/ontologies/ponto/Oracle#> rdf:type owl:Ontology .
 <http://www.mobr.ai/ontologies/ponto/Oracle#> owl:imports <Oracle.ttl> .
 
-<http://www.mobr.ai/ontologies/ponto/RBox#> rdf:type owl:Ontology .
-<http://www.mobr.ai/ontologies/ponto/RBox#> owl:imports <RBox.ttl> .
+# <http://www.mobr.ai/ontologies/ponto/RBox#> rdf:type owl:Ontology .
+# <http://www.mobr.ai/ontologies/ponto/RBox#> owl:imports <RBox.ttl> .
 
 <http://www.mobr.ai/ontologies/ponto/Stake#> rdf:type owl:Ontology .
 <http://www.mobr.ai/ontologies/ponto/Stake#> owl:imports <Stake.ttl> .
