@@ -25,5 +25,6 @@ ponto:Council a owl:Class ;
     rdfs:subClassOf ponto:GovernanceComponent .
 
 #properties and relationships
-ponto:hasGovernanceCouncil rdfs:domain ponto:Governance ;
+ponto:hasGovernanceCouncil a owl:ObjectProperty ;
+    rdfs:domain ponto:Governance ;
     rdfs:range ponto:Council .

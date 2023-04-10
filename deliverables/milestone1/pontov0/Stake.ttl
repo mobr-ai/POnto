@@ -23,20 +23,20 @@ ponto:StakePool a owl:Class ;
 
 # Relationships
 
-ponto:hasStake a rdf:Property ;
+ponto:hasStake a owl:ObjectProperty ;
     rdfs:domain ponto:StakeHolder ;
     rdfs:range ponto:Stake ;
     rdfs:comment "A StakeHolder that holds a certain amount of stake in the Polkadot network." .
 
 # A Stake Holder can belong to multiple Stake Pools
-ponto:belongsToPool a rdf:Property ;
+ponto:belongsToPool a owl:ObjectProperty ;
     rdfs:comment "Relates a stake holder to the stake pool they belong to." ;
     rdf:type owl:ObjectProperty ;
     rdfs:domain ponto:StakeHolder ;
     rdfs:range ponto:StakePool .
 
 # A Stake Pool can have multiple Stake Holders
-ponto:hasStakeHolder a rdf:Property ;
+ponto:hasStakeHolder a owl:ObjectProperty ;
     rdfs:comment "Relates a stake pool to the stake holders that belong to it." ;
     rdf:type owl:ObjectProperty ;
     rdfs:domain ponto:StakePool ;

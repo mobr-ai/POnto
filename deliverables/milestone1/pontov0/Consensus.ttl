@@ -26,46 +26,49 @@ ponto:Nominator a owl:Class ;
 
 
 # relationships
-ponto:hasValidator rdfs:domain ponto:Collator ;
+ponto:hasValidator a owl:ObjectProperty ;
+    rdfs:domain ponto:Collator ;
     rdfs:range ponto:Validator .
 
-ponto:hasNominator rdfs:domain ponto:StakeHolder ;
+ponto:hasNominator a owl:ObjectProperty ;
+    rdfs:domain ponto:StakeHolder ;
     rdfs:range ponto:Nominator .
 
-ponto:isConsensusMechanism rdfs:domain ponto:PolkadotArchitecture ;
+ponto:isConsensusMechanism a owl:ObjectProperty ;
+    rdfs:domain ponto:PolkadotArchitecture ;
     rdfs:range ponto:ConsensusMechanism .
 
-ponto:proposesBlock a rdf:Property ;
+ponto:proposesBlock a owl:ObjectProperty ;
     rdfs:domain ponto:Validator ;
     rdfs:range ponto:Transaction ;
     rdfs:comment "A Validator node that proposes a block in the Polkadot network." .
 
-ponto:nominates a rdf:Property ;
+ponto:nominates a owl:ObjectProperty ;
     rdfs:domain ponto:Nominator ;
     rdfs:range ponto:Validator ;
     rdfs:comment "A Nominator nominates a validator in the Polkadot network." .
 
-ponto:validatesBlock a rdf:Property ;
+ponto:validatesBlock a owl:ObjectProperty ;
     rdfs:domain ponto:Validator ;
     rdfs:range ponto:Transaction ;
     rdfs:comment "A Validator node that validates a block in the Polkadot network." .
 
-ponto:validatesTransaction a rdf:Property ;
+ponto:validatesTransaction a owl:ObjectProperty ;
     rdfs:domain ponto:Validator ;
         rdfs:range ponto:Transaction ;
     rdfs:comment "A Validator node that validates a transaction." .
 
-ponto:buildsBlock a rdf:Property ;
+ponto:buildsBlock a owl:ObjectProperty ;
     rdfs:domain ponto:Collator ;
     rdfs:range ponto:Transaction ;
     rdfs:comment "A Collator node that builds a block for a specific parachain." .
 
-ponto:collectsTransaction a rdf:Property ;
+ponto:collectsTransaction a owl:ObjectProperty ;
     rdfs:domain ponto:Collator ;
     rdfs:range ponto:Transaction ;
     rdfs:comment "A Collator node that collects transactions for a specific parachain." .
 
-ponto:usesProofOfStake a rdf:Property ;
+ponto:usesProofOfStake a owl:ObjectProperty ;
     rdfs:domain ponto:ProofOfStake ;
     rdfs:range ponto:Validator ;
     rdfs:comment "A Validator that participates in the ProofOfStake consensus mechanism." .

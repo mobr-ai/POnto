@@ -27,17 +27,18 @@
 
 <https://www.apache.org/licenses/LICENSE-2.0>
     rdf:type dcterms:LicenseDocument ;
+    rdfs:label "Apache License v2" ;
     dc:title "Apache License, Version 2.0" .
 
 # this ontology uses modules aiming at a better organization
-<http://www.mobr.ai/ontologies/ponto/consensus#> rdf:type owl:Ontology .
-<http://www.mobr.ai/ontologies/ponto/consensus#> owl:imports <Consensus.ttl> .
+<http://www.mobr.ai/ontologies/ponto/Consensus#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Consensus#> owl:imports <Consensus.ttl> .
 
-<http://www.mobr.ai/ontologies/ponto/governance#> rdf:type owl:Ontology .
-<http://www.mobr.ai/ontologies/ponto/governance#> owl:imports <Governance.ttl> .
+<http://www.mobr.ai/ontologies/ponto/Governance#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Governance#> owl:imports <Governance.ttl> .
 
-<http://www.mobr.ai/ontologies/ponto/ledger#> rdf:type owl:Ontology .
-<http://www.mobr.ai/ontologies/ponto/ledger#> owl:imports <Ledger.ttl> .
+<http://www.mobr.ai/ontologies/ponto/Ledger#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Ledger#> owl:imports <Ledger.ttl> .
 
 <http://www.mobr.ai/ontologies/ponto/Oracle#> rdf:type owl:Ontology .
 <http://www.mobr.ai/ontologies/ponto/Oracle#> owl:imports <Oracle.ttl> .
@@ -76,12 +77,12 @@ ponto:Component a owl:Class ;
     rdfs:subClassOf owl:Thing .
 
 # A component is a part of an architecture
-ponto:partOf rdf:type rdf:Property ;
+ponto:partOf a owl:ObjectProperty ;
     rdfs:domain ponto:Component ;
     rdfs:range ponto:Architecture .
 
 # An architecture is composed of components
-ponto:hasComponent rdf:type rdf:Property ;
+ponto:hasComponent a owl:ObjectProperty ;
     rdfs:domain ponto:Architecture ;
     rdfs:range ponto:Component .
 
@@ -177,37 +178,39 @@ ponto:AccountHolder a owl:Class ;
 
 # Defining Relationships
 
+#account
+ponto:hasAccount a owl:ObjectProperty ;
+    rdfs:domain ponto:Wallet ;
+    rdfs:range ponto:Account .
+
+ponto:hasAccount owl:inverseOf ponto:isAccountOf .
+
 # A ledger implements an architecture
-ponto:implements rdf:type rdf:Property ;
+ponto:implements a owl:ObjectProperty ;
     rdfs:domain ponto:LedgerArchitecture ;
     rdfs:range ponto:DistributedLedger .
 
 # parachain
 # A parachain is part of polkadot architecture
-ponto:partOf rdf:type rdf:Property ;
-    rdfs:domain ponto:Parachain ;
+ponto:partOf rdfs:domain ponto:Parachain ;
+    rdfs:range ponto:PolkadotArchitecture .
+
+# A relay chain is part of polkadot architecture
+ponto:partOf rdfs:domain ponto:RelayChain ;
     rdfs:range ponto:PolkadotArchitecture .
 
 # A polkadot architecture has parachain
-ponto:hasParachain rdf:type rdf:Property ;
+ponto:hasParachain a owl:ObjectProperty ;
     rdfs:domain ponto:PolkadotArchitecture ;
     rdfs:range ponto:Parachain .
 
-
-# relay chain
-# A relay chain is part of polkadot architecture
-ponto:partOf rdf:type rdf:Property ;
-    rdfs:domain ponto:RelayChain ;
-    rdfs:range ponto:PolkadotArchitecture .
-
 # A polkadot architecture has relay chain
-ponto:hasParachain rdf:type rdf:Property ;
-    rdfs:domain ponto:PolkadotArchitecture ;
+ponto:hasParachain rdfs:domain ponto:PolkadotArchitecture ;
     rdfs:range ponto:RelayChain .
 
-
 # bridge
-ponto:usesBridge rdfs:domain ponto:RelayChain ;
+ponto:usesBridge a owl:ObjectProperty ;
+    rdfs:domain ponto:RelayChain ;
     rdfs:range ponto:Bridge .
 
 ponto:usesBridge rdfs:domain ponto:Parachain ;

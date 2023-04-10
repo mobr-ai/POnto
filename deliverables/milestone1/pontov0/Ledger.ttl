@@ -61,10 +61,9 @@ ponto:Phala a owl:Class ;
     rdfs:subClassOf ponto:DistributedLedger .
 
 # relationships
-ponto:implements rdf:type rdf:Property ;
+ponto:implements a owl:ObjectProperty ;
     rdfs:domain ponto:PolkadotArchitecture ;
     rdfs:range ponto:Polkadot .
 
-ponto:implements rdf:type rdf:Property ;
-    rdfs:domain ponto:PolkadotArchitecture ;
+ponto:implements rdfs:domain ponto:PolkadotArchitecture ;
     rdfs:range ponto:Kusama .

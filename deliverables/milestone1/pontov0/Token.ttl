@@ -39,15 +39,12 @@ ponto:SmartContract a owl:Class ;
     rdfs:subClassOf ponto:Account .
 
 # relationships
-ponto:hasAccount rdfs:domain ponto:Node ;
-    rdfs:range ponto:Account .
-
-ponto:hasAccount owl:inverseOf ponto:isAccountOf .
-
-ponto:hasToken rdfs:domain ponto:Account ;
+ponto:hasToken a owl:ObjectProperty ;
+    rdfs:domain ponto:Account ;
     rdfs:range ponto:Token .
 
 ponto:hasToken owl:inverseOf ponto:belongsTo .
 
-ponto:isNativeToken rdfs:domain ponto:Token ;
+ponto:isNativeToken a owl:ObjectProperty ;
+    rdfs:domain ponto:Token ;
     rdfs:range ponto:NativeToken .

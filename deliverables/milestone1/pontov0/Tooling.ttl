@@ -13,7 +13,7 @@ ponto:Substrate a owl:Class ;
 ponto:Ink a owl:Class ;
     rdfs:label "Ink!" ;
     rdfs:comment "a high-level programming language designed specifically for writing smart contracts on the Polkadot network." ;
-    rdfs:subClassOf ponto:SmartContractPlatform .
+    rdfs:subClassOf ponto:Component .
 
 ponto:PSCR a owl:Class ;
     rdfs:label "Parity Smart Contract Runtime" ;
@@ -23,7 +23,7 @@ ponto:PSCR a owl:Class ;
 ponto:Wasm a owl:Class ;
     rdfs:label "WebAssembly" ;
     rdfs:comment "A low-level virtual machine that is used to run smart contracts on Polkadot." ;
-    rdfs:subClassOf ponto:Component .
+    rdfs:subClassOf ponto:SmartContractPlatform .
 
 ponto:PolkadotJS a owl:Class ;
     rdfs:label "Polkadot JS" ;

@@ -22,43 +22,36 @@ ponto:Recipient a rdfs:Class ;
 
 # properties
 ponto:amountTransferred a owl:DatatypeProperty ;
-    rdfs:label "Amount Transferred" ;
     rdfs:comment "The amount of assets transferred in a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range xsd:decimal .
 
 ponto:typeOfAsset a owl:DatatypeProperty ;
-    rdfs:label "Type of Asset" ;
     rdfs:comment "The type of asset transferred in a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range xsd:string .
 
 ponto:uniqueID a owl:DatatypeProperty ;
-    rdfs:label "Unique Identification Number" ;
     rdfs:comment "The unique identification number of a record in the Polkadot blockchain." ;
     rdfs:domain ponto:Record ;
     rdfs:range xsd:string .
 
 ponto:hasRecord a owl:ObjectProperty ;
-    rdfs:label "Has Record" ;
     rdfs:comment "The record associated with a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range ponto:Record .
 
 ponto:hasSender a owl:ObjectProperty ;
-    rdfs:label "Has Sender" ;
     rdfs:comment "The sender of a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range ponto:Sender .
 
 ponto:hasRecipient a owl:ObjectProperty ;
-    rdfs:label "Has Recipient" ;
     rdfs:comment "The recipient of a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range ponto:Recipient .
 
 ponto:belongsToBlock a owl:ObjectProperty ;
-    rdfs:label "Belongs to Block" ;
     rdfs:comment "The block where the transaction is recorded" ;
     rdfs:domain ponto:Transaction ;
     rdfs:range ponto:Block .
