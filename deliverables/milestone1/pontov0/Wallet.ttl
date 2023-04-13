@@ -3,52 +3,35 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-# Polkadot wallet classes
+# Polkadot wallet instances
 
-ponto:BrowserWallet a owl:Class ;
-    rdfs:label "Browser Wallet" ;
-    rdfs:comment "A wallet that runs in a web browser and can be accessed from any device." ;
-    rdfs:subClassOf ponto:Wallet .
-
-ponto:MobileWallet a owl:Class ;
-    rdfs:label "Mobile Wallet" ;
-    rdfs:comment "A wallet that runs on a mobile device and can be used to make payments on the go." ;
-    rdfs:subClassOf ponto:Wallet .
-
-ponto:Enkrypt a owl:Class ;
+ponto:Enkrypt a ponto:BrowserWallet ;
     rdfs:label "Enkrypt" ;
-    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." ;
-    rdfs:subClassOf ponto:BrowserWallet .
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
 
-ponto:PolkaGate a owl:Class ;
+ponto:PolkaGate a ponto:BrowserWallet ;
     rdfs:label "PolkaGate" ;
-    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." ;
-    rdfs:subClassOf ponto:BrowserWallet .
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
 
-ponto:SubWallet a owl:Class ;
+ponto:SubWallet a ponto:BrowserWallet ;
     rdfs:label "SubWallet" ;
-    rdfs:comment "A Polkadot wallet that supports Substrate-based chains and allows users to manage their assets." ;
-    rdfs:subClassOf ponto:BrowserWallet .
+    rdfs:comment "A Polkadot wallet that supports Substrate-based chains and allows users to manage their assets." .
 
-ponto:Talisman a owl:Class ;
+ponto:Talisman a ponto:BrowserWallet ;
     rdfs:label "Talisman" ;
-    rdfs:comment "A Polkadot wallet that is designed to work with validator nodes and supports hardware wallets." ;
-    rdfs:subClassOf ponto:BrowserWallet .
+    rdfs:comment "A Polkadot wallet that is designed to work with validator nodes and supports hardware wallets." .
 
-ponto:FearlessWallet a owl:Class ;
+ponto:FearlessWallet a ponto:MobileWallet ;
     rdfs:label "Fearless Wallet" ;
-    rdfs:comment "A Polkadot wallet that is designed to be user-friendly and secure, with support for staking and governance." ;
-    rdfs:subClassOf ponto:MobileWallet .
+    rdfs:comment "A Polkadot wallet that is designed to be user-friendly and secure, with support for staking and governance." .
 
-ponto:NovaWallet a owl:Class ;
+ponto:NovaWallet a ponto:MobileWallet ;
     rdfs:label "Nova Wallet" ;
-    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." ;
-    rdfs:subClassOf ponto:MobileWallet .
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
 
-ponto:PolkaWallet a owl:Class ;
+ponto:PolkaWallet a ponto:MobileWallet ;
     rdfs:label "PolkaWallet" ;
-    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." ;
-    rdfs:subClassOf ponto:MobileWallet .
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
 
 
 #relationships

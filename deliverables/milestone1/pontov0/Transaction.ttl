@@ -33,13 +33,13 @@ ponto:typeOfAsset a owl:DatatypeProperty ;
 
 ponto:uniqueID a owl:DatatypeProperty ;
     rdfs:comment "The unique identification number of a record in the Polkadot blockchain." ;
-    rdfs:domain ponto:Record ;
+    rdfs:domain ponto:LedgerRecord ;
     rdfs:range xsd:string .
 
 ponto:hasRecord a owl:ObjectProperty ;
     rdfs:comment "The record associated with a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
-    rdfs:range ponto:Record .
+    rdfs:range ponto:LedgerRecord .
 
 ponto:hasSender a owl:ObjectProperty ;
     rdfs:comment "The sender of a Polkadot blockchain transaction." ;

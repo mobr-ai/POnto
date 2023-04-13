@@ -5,27 +5,29 @@
 
 # smart contract platforms and other toolings in the Polkadot Ecosystem
 
-ponto:Substrate a owl:Class ;
+ponto:Substrate a ponto:SDK ;
     rdfs:label "Substrate" ;
-    rdfs:comment "A blockchain development framework that provides provides a set of tools and libraries that developers can use to build customized blockchain networks and smart contract platforms." ;
-    rdfs:subClassOf ponto:SmartContractPlatform .
+    rdfs:comment "Substrate is a Software Development Kit (SDK) that allows you to build application-specific blockchains that can run as standalone services or in parallel with other chains with the shared security provided by the Polkadot ecosystem." .
 
-ponto:Ink a owl:Class ;
+ponto:FRAME a ponto:SmartContractPlatform ;
+    rdfs:label "FRAME" ;
+    rdfs:comment "A development environment that provides a modular and flexible collection of components for building a customized Substrate runtime." ;
+    ponto:partOf ponto:Substrate .
+
+ponto:Pallet a ponto:Module ;
+    rdfs:label "Pallet" ;
+    rdfs:comment "A set of compoments and support libraries that can be used, modified and extended to build the runtime logic to suit the needs of blockchains." ;
+    ponto:partOf ponto:FRAME .
+
+ponto:Ink a ponto:ProgrammingLanguage ;
     rdfs:label "Ink!" ;
-    rdfs:comment "a high-level programming language designed specifically for writing smart contracts on the Polkadot network." ;
-    rdfs:subClassOf ponto:Component .
+    rdfs:comment "ink! is an eDSL (Embedded Domain Specific Language) to write smart contracts in Rust for blockchains built on the Substrate framework. ink! contracts are compiled to WebAssembly." .
 
-ponto:PSCR a owl:Class ;
-    rdfs:label "Parity Smart Contract Runtime" ;
-    rdfs:comment "A lightweight, modular runtime environment for executing smart contracts on the Polkadot network." ;
-    rdfs:subClassOf ponto:SmartContractPlatform .
-
-ponto:Wasm a owl:Class ;
+ponto:Wasm a ponto:VirtualMachine ;
     rdfs:label "WebAssembly" ;
-    rdfs:comment "A low-level virtual machine that is used to run smart contracts on Polkadot." ;
-    rdfs:subClassOf ponto:SmartContractPlatform .
+    rdfs:comment "WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine." ;
+    ponto:targetArchitectureOf ponto:Ink .
 
-ponto:PolkadotJS a owl:Class ;
+ponto:PolkadotJS a ponto:SDK ;
     rdfs:label "Polkadot JS" ;
-    rdfs:comment "A collection of libraries and tools for building Polkadot applications in JavaScript." ;
-    rdfs:subClassOf ponto:Component .
+    rdfs:comment "A collection of libraries and tools for building Polkadot applications in JavaScript." .

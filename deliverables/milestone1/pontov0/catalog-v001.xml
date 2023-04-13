@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Tooling-abox.ttl" uri="Tooling-abox.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Tooling-tbox.ttl" uri="Tooling-tbox.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Ledger-tbox.ttl" uri="Ledger-tbox.ttl"/>
+    <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Ledger-abox.ttl" uri="Ledger-abox.ttl"/>
     <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Wallet.ttl" uri="Wallet.ttl"/>
     <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Transaction.ttl" uri="Transaction.ttl"/>
     <uri id="User Entered Import Resolution" name="http://www.mobr.ai/ontologies/Tooling.ttl" uri="Tooling.ttl"/>
