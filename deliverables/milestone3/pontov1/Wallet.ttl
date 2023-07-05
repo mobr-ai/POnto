@@ -1,0 +1,39 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Polkadot wallet instances
+
+ponto:Enkrypt a ponto:BrowserWallet ;
+    rdfs:label "Enkrypt" ;
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
+
+ponto:PolkaGate a ponto:BrowserWallet ;
+    rdfs:label "PolkaGate" ;
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
+
+ponto:SubWallet a ponto:BrowserWallet ;
+    rdfs:label "SubWallet" ;
+    rdfs:comment "A Polkadot wallet that supports Substrate-based chains and allows users to manage their assets." .
+
+ponto:Talisman a ponto:BrowserWallet ;
+    rdfs:label "Talisman" ;
+    rdfs:comment "A Polkadot wallet that is designed to work with validator nodes and supports hardware wallets." .
+
+ponto:FearlessWallet a ponto:MobileWallet ;
+    rdfs:label "Fearless Wallet" ;
+    rdfs:comment "A Polkadot wallet that is designed to be user-friendly and secure, with support for staking and governance." .
+
+ponto:NovaWallet a ponto:MobileWallet ;
+    rdfs:label "Nova Wallet" ;
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
+
+ponto:PolkaWallet a ponto:MobileWallet ;
+    rdfs:label "PolkaWallet" ;
+    rdfs:comment "A Polkadot wallet that supports multiple chains and allows users to manage their assets." .
+
+
+#relationships
+ponto:hasWallet rdfs:domain ponto:AccountHolder ;
+    rdfs:range ponto:Wallet .

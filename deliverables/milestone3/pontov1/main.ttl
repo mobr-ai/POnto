@@ -1,0 +1,411 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@base <http://www.mobr.ai/ontologies/ponto#> .
+
+<http://www.mobr.ai/ontologies/ponto#> a owl:Ontology ;
+	owl:versionIRI <http://www.mobr.ai/ontologies/ponto/v0/> ;
+	owl:imports <http://www.w3.org/2003/06/sw-vocab-status/ns> ;
+	dc:contributor "Marcio Moreno" , "Rafael Brandao" ;
+	dc:creator "MOBR Systems" ;
+	dc:title "POnto - An ontology for the Polkadot ecosystem" ;
+	vann:preferredNamespacePrefix "ponto" ;
+	rdfs:comment "This Polkadot ontology specification uses W3C RDF Schema and the Web Ontology Language. Its main source of information comes from the Polkadot Whitepaper written by Dr. Gavin Wood."@en ;
+	rdfs:seeAlso <https://github.com/mobr-ai/POnto> , <https://polkadot.network/whitepaper/> ;
+	owl:versionInfo "0.1" ;
+	ns:term_status "unstable" ;
+    dc:license <https://www.apache.org/licenses/LICENSE-2.0> .
+
+<https://www.apache.org/licenses/LICENSE-2.0>
+    rdf:type dcterms:LicenseDocument ;
+    rdfs:label "Apache License v2" ;
+    dc:title "Apache License, Version 2.0" .
+
+# this ontology uses modules aiming at a better organization
+<http://www.mobr.ai/ontologies/ponto/Consensus#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Consensus#> owl:imports <Consensus.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Governance#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Governance#> owl:imports <Governance.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Ledger#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Ledger#> owl:imports <Ledger.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Oracle#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Oracle#> owl:imports <Oracle.ttl> .
+
+# <http://www.mobr.ai/ontologies/ponto/RBox#> rdf:type owl:Ontology .
+# <http://www.mobr.ai/ontologies/ponto/RBox#> owl:imports <RBox.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Stake#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Stake#> owl:imports <Stake.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Token#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Token#> owl:imports <Token.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Tooling#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Tooling#> owl:imports <Tooling.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Transaction#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Transaction#> owl:imports <Transaction.ttl> .
+
+<http://www.mobr.ai/ontologies/ponto/Wallet#> rdf:type owl:Ontology .
+<http://www.mobr.ai/ontologies/ponto/Wallet#> owl:imports <Wallet.ttl> .
+
+
+# basic ontology definitions
+
+# general notion: a system architecture is composed by a group of components.
+
+ponto:Architecture a owl:Class ;
+    rdfs:label "System Architecture" ;
+    rdfs:comment "A high-level structure of a software system that defines its components, their relationships, and their interactions." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Component a owl:Class ;
+    rdfs:label "Architecture Component" ;
+    rdfs:comment "A specific technology entity that composes a system architecture or implementation." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Module a owl:Class ;
+    rdfs:label "Module" ;
+    rdfs:comment "A set of components." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Protocol a owl:Class ;
+    rdfs:label "Protocol" ;
+    rdfs:comment "A system of rules that allows two or more entities of a communications system to transmit information. The protocol defines the rules, syntax, semantics, and synchronization of communication and possible recovery methods." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:SDK a owl:Class ;
+    rdfs:label "Software Development Kit" ;
+    rdfs:comment "A collection of software development tools in one installable package." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:VirtualMachine a owl:Class ;
+    rdfs:label "Virtual Machine" ;
+    rdfs:comment "A compute resource that uses software instead of a physical computer to run programs and deploy applications." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:ProgrammingLanguage a owl:Class ;
+    rdfs:label "Programming Language" ;
+    rdfs:comment "A system of notation for writing computer programs." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Metadata a owl:Class ;
+    rdfs:label "Metadata" ;
+    rdfs:comment "Data that includes information about other data, such as information about a specific transaction." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Dapp a owl:Class ;
+    rdfs:label "Descentralized Application" ;
+    rdfs:comment "Software application that runs as part of a distributed network as opposed to being run on a specific system or set of systems." ;
+    rdfs:subClassOf ponto:Component .
+
+# A component is a part of an architecture
+ponto:partOf a owl:ObjectProperty ;
+    rdfs:domain ponto:Component ;
+    rdfs:range ponto:Architecture .
+
+# An architecture is composed of components
+ponto:hasComponent a owl:ObjectProperty ;
+    rdfs:domain ponto:Architecture ;
+    rdfs:range ponto:Component .
+
+ponto:RelayChain a owl:Class ;
+    rdfs:label "Relay Chain" ;
+    rdfs:comment "A central hub in the Polkadot architecture, which coordinates and connects all the parachains in the ecosystem. It coordinates consensus and communication between parachains (and external chains, via bridges)." ;
+    rdfs:subClassOf ponto:Blockchain .
+
+ponto:Parachain a owl:Class ;
+    rdfs:label "Parachain" ;
+    rdfs:comment "A blockchain that meets several characteristics that allow it to work within the confines of the Polkadot Host. Also known as 'parallelized chain'." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:SystemParachain a owl:Class ;
+    rdfs:label "System Parachain" ;
+    rdfs:comment "A parachain that is part of the Polkadot core protocol. System parachains are allocated a parachain execution core by governance rather than auction." ;
+    rdfs:subClassOf ponto:Parachain .
+
+ponto:Parathread a owl:Class ;
+    rdfs:label "Parathread" ;
+    rdfs:comment "A blockchain that works within the confines of the Polkadot Host, thus allowing it to connect to the Polkadot Relay Chain. This can be done either by becoming a parachain or connecting on a 'pay as you go' basis. All parachains start their life-cycle as a parathread." ;
+    rdfs:subClassOf ponto:Parachain .
+
+ponto:LeasePeriod a owl:Class ;
+    rdfs:label "Lease Period" ;
+    rdfs:comment "A particular amount of time that a parachain for which the parachain can connect to the Relay Chain." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:AvailabilityCores a owl:Class ;
+    rdfs:label "Availability Cores" ;
+    rdfs:comment "Slots used to process parachains. The runtime assigns each parachain to an availability core and validators can fetch information about the cores, such as parachain block candidates, by calling the appropriate Runtime API." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:BitfieldArray a owl:Class ;
+    rdfs:label "Bitfield Array" ;
+    rdfs:comment "A bitfield array contains single-bit values which indicate whether a candidate is available. The number of items is equal of to the number of availability cores and each bit represents a vote on the corresponding core in the given order." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:ParachainRegistry a owl:Class ;
+    rdfs:label "Parachain Registry" ;
+    rdfs:comment "A relatively simple database-like construct that holds both static and dynamic information on each chain." ;
+    rdfs:subClassOf ponto:Thing .
+
+ponto:paraid a xsd:string ;
+    rdfs:label "ParaId" ;
+    rdfs:comment "A unique numeric (non-negative integer) identifier for a parachain." .
+
+ponto:nettype a rdf:Property ;
+        rdfs:domain ponto:DistributedLedger ;
+        rdfs:range xsd:string .
+
+ponto:mainnet a xsd:string ;
+    rdfs:label "mainnet" ;
+    rdfs:comment "A distributed ledger fully developed and deployed where transactions are broadcasted, verified, and recorded." .
+
+ponto:testnet a xsd:string ;
+    rdfs:label "testnet" ;
+    rdfs:comment "A distributed ledger to be used for testing and experimentation without risk to real funds or the main network." .
+
+ponto:nettype rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:mainnet, ponto:testnet
+] .
+
+ponto:Bridge a owl:Class ;
+    rdfs:label "Bridge" ;
+    rdfs:comment "A parachain that acts as an intermediary between the Polkadot Relay Chain and an external chain, in such a way that it appears to the Relay Chain that the external chain is a parachain (i.e., meets the Polkadot Host's requirements of parachains). Bridges allow for interaction between other blockchains, such as Ethereum and Bitcoin, that are not natively compatible with Polkadot." ;
+    rdfs:subClassOf ponto:Parachain .
+
+# wallet
+ponto:Wallet a owl:Class ;
+    rdfs:label "Wallet" ;
+    rdfs:comment "A program that allows one to store private keys and sign transactions on distributed ledgers" ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:BrowserWallet a owl:Class ;
+    rdfs:label "Browser Wallet" ;
+    rdfs:comment "A wallet that runs in a web browser and can be accessed from any device." ;
+    rdfs:subClassOf ponto:Wallet .
+
+ponto:MobileWallet a owl:Class ;
+    rdfs:label "Mobile Wallet" ;
+    rdfs:comment "A wallet that runs on a mobile device and can be used to make payments on the go." ;
+    rdfs:subClassOf ponto:Wallet .
+
+
+# Classes for Polkadot nodes
+ponto:Node a owl:Class ;
+    rdfs:label "Node" ;
+    rdfs:comment "A component that participates in the Polkadot network." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:FullNode a owl:Class ;
+    rdfs:label "Full Node" ;
+    rdfs:comment "A node that stores a full copy of the blockchain and participates in block validation." ;
+    rdfs:subClassOf ponto:Node .
+
+ponto:LightNode a owl:Class ;
+    rdfs:label "Light Node" ;
+    rdfs:comment "A node that only stores a subset of the blockchain data and relies on other nodes for information." ;
+    rdfs:subClassOf ponto:Node .
+
+# in the polkadot ecosystem, a validator can operate as either full nodes or as light nodes, depending on its resources and network requirements.
+ponto:Validator a owl:Class ;
+    rdfs:label "Validator" ;
+    rdfs:comment "A node responsible for validating transactions and blocks." ;
+    rdfs:subClassOf ponto:Node .
+
+# in the polkadot ecosystem, a collator is desirably a full nodes, but it is not a requirement.
+ponto:Collator a owl:Class ;
+    rdfs:label "Collator" ;
+    rdfs:comment "A node that maintains a parachain by collecting parachain transactions and producing state transition proofs for the validators." ;
+    rdfs:subClassOf ponto:Node ;
+    rdfs:partOf ponto:Parachain .
+
+# person or organization
+ponto:AccountHolder a owl:Class ;
+    rdfs:label "Account Holder" ;
+    rdfs:comment "An entity that holds one or more accounts, such as an individual or organization." ;
+    rdfs:subClassOf owl:Thing .
+
+# ledger basic definitions
+ponto:LedgerArchitecture a owl:Class ;
+    rdfs:label "Ledger Architecture" ;
+    rdfs:comment "A specific design and organization of components that make up a distributed and decentralized ledger system. It defines the rules and protocols for how different parts of the system interact with each other to achieve the desired functionality and security." ;
+    rdfs:subClassOf ponto:Architecture .
+
+ponto:PolkadotArchitecture a owl:Class ;
+    rdfs:label "Polkadot Architecture" ;
+    rdfs:comment "An architecture based on a multichain network that includes several different types of chains, each with its own specific purpose and functionality. The core of the architecture is a relay chain that facilitates communication with parachains and parathreads." ;
+    rdfs:subClassOf ponto:LedgerArchitecture .
+
+ponto:DistributedLedger a owl:Class ;
+    rdfs:label "Distributed Ledger" ;
+    rdfs:comment "A decentralized and distributed digital ledger that is implemented by a network of computers (nodes) that participate in the network." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:LedgerRecord a owl:Class ;
+    rdfs:label "Ledger Record" ;
+    rdfs:comment "A digital record that contains information about a specific event or transaction that has occurred on the blockchain." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Blockchain a owl:Class ;
+    rdfs:label "Blockchain" ;
+    rdfs:comment "A distributed database that maintains a continuously growing list of ordered ledger records, called blocks." ;
+    rdfs:subClassOf ponto:DistributedLedger .
+
+ponto:Scalability a owl:Class ;
+    rdfs:label "Scalability" ;
+    rdfs:comment "While an ambiguous concept, [blockchain] scalability can be understood as the ability for the network to scale in capabilities (e.g. processing more transactions) when needed." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Block a owl:Class ;
+    rdfs:label "Block" ;
+    rdfs:comment "Data structure within a blockchain database, where transaction data in a blockchain are permanently recorded." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Sealing a owl:Class ;
+    rdfs:label "Sealing" ;
+    rdfs:comment "The process of adding a block to the Relay Chain. Note that finalization is a separate process - blocks are finalized sometime after they are sealed." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Genesis a owl:Class ;
+    rdfs:label "Genesis" ;
+    rdfs:comment "The origin of a blockchain, also known as block 0. It can also be used to reference the initial state of the blockchain at origination." ;
+    rdfs:subClassOf ponto:Block .
+
+ponto:ReGenesis a owl:Class ;
+    rdfs:label "Re-Genesis" ;
+    rdfs:comment "Re-Genesis is the process of exporting the current chain state, and creating a new chain that builds on it. Re-Genesis will involve stop-the-world migration, which results in a period of time when no actual blocks are added to the blockchain. In a way, re-genesis can be viewed as a hard fork process. A formal design of Re-Genesis on Substrate is still under development - Re-Genesis Rationale and Design." ;
+    rdfs:subClassOf ponto:HardFork .
+
+ponto:HardFork a owl:Class ;
+    rdfs:label "Hard Fork" ;
+    rdfs:comment "A permanent diversion of a blockchain occurs quickly due to a high priority change in a consensus rule. Clients who follow a hard fork always need to upgrade their clients to continue following the upgraded chain. Hard forks are considered permanent divergences of a chain for which non-upgraded clients are following consensus rules incompatible to the ones followed by upgraded clients." ;
+    rdfs:subClassOf ponto:Blockchain .
+
+ponto:SoftFork a owl:Class ;
+    rdfs:label "Soft Fork" ;
+    rdfs:comment "A backward compatible change to client code causes upgraded clients to start mining a new chain. Requires a 'vote-by-hashrate' of a majority of miners to enact successfully. Soft forks are considered temporary divergences in a chain since non-upgraded clients do not follow the new consensus rules but upgraded clients are still compatible with old consensus rules." ;
+    rdfs:subClassOf ponto:Blockchain .
+
+ponto:HardSpoon a owl:Class ;
+    rdfs:label "Hard Spoon" ;
+    rdfs:comment "Defined by Jae Kwon of Cosmos as 'a new chain that takes into account state from an existing chain; not to compete, but to provide broad access.' A non-contentious blockchain that inherits the state of the underlying blockchain and creates a new branch of the same blockchain." ;
+    rdfs:subClassOf ponto:Blockchain .
+
+ponto:Interoperability a owl:Class ;
+    rdfs:label "Interoperability" ;
+    rdfs:comment "The ability for some sort of system to exchange and make use of information often compared to 'cross-chain' technologies." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:BlockExplorer a owl:Class ;
+    rdfs:label "Block Explorer" ;
+    rdfs:comment "An application that allows a user to explore the different blocks on a blockchain." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:NodeExplorer a owl:Class ;
+    rdfs:label "Node Explorer" ;
+    rdfs:comment "A tool that gives you information about a node, such as the latest blocks sealed, finalized, and the current chain state as known by that node." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Runtime a owl:Class ;
+    rdfs:label "Runtime" ;
+    rdfs:comment "The state transition function of a blockchain. It defines a valid algorithm for determining the state of the next block given the previous state." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:RuntimeModule a owl:Class ;
+    rdfs:label "Runtime Module" ;
+    rdfs:comment "A module that implements specific transition functions and features one might want to have in their runtime. Each module should have domain-specific logic. For example, a Balances module has logic to deal with accounts and balances. In Substrate, modules are called 'pallets'." ;
+    rdfs:subClassOf ponto:Module .
+
+ponto:Pallet a owl:Class ;
+    rdfs:label "Pallet" ;
+    rdfs:comment "Substrate Runtime Module. That is, a set of compoments and support libraries that can be used, modified and extended to build the runtime logic to suit the needs of blockchains." ;
+    rdfs:subClassOf ponto:RuntimeModule .
+
+ponto:Substrate a owl:Class ;
+    rdfs:label "Substrate" ;
+    rdfs:comment "A modular framework for building blockchains. Polkadot is built using Substrate. Chains built with Substrate will be easy to connect as parachains." .
+    rdfs:subClassOf ponto:SDK .
+
+ponto:RootOrigin a owl:Class ;
+    rdfs:label "Root Origin" ;
+    rdfs:comment "A system-level origin in Substrate. This is the highest privilege level and can be thought of as the superuser of the runtime origin." .
+    rdfs:subClassOf ponto:SDK .
+
+ponto:SCALE a owl:Class ;
+    rdfs:label "SCALE" ;
+    rdfs:comment "Substrate uses a lightweight and efficient encoding and decoding program to optimize how data is sent and received over the network. The program used to serialize and deserialize data is called the SCALE codec, with SCALE being an acronym for simple concatenated aggregate little-endian." .
+    rdfs:subClassOf ponto:Thing .
+
+ponto:FRAME a owl:Class ;
+    rdfs:label "FRAME" ;
+    rdfs:comment "The collection of Substrate-provided pallets" ;
+    ponto:subClassOf ponto:Substrate .
+
+# Defining Relationships
+
+# connecting testnets with a mainnet
+ponto:tests a owl:ObjectProperty ;
+    rdfs:domain ponto:DistributedLedger ;
+    rdfs:range ponto:DistributedLedger .
+
+#account
+ponto:hasAccount a owl:ObjectProperty ;
+    rdfs:domain ponto:Wallet ;
+    rdfs:range ponto:Account .
+
+ponto:hasAccount owl:inverseOf ponto:isAccountOf .
+
+ponto:partOf rdfs:domain ponto:LedgerRecord ;
+    rdfs:range ponto:Block .
+
+ponto:partOf rdfs:domain ponto:Block ;
+    rdfs:range ponto:Blockchain .
+
+# parachain
+# A parachain is part of polkadot architecture
+ponto:partOf rdfs:domain ponto:Parachain ;
+    rdfs:range ponto:PolkadotArchitecture .
+
+# A relay chain is part of polkadot architecture
+ponto:partOf rdfs:domain ponto:RelayChain ;
+    rdfs:range ponto:PolkadotArchitecture .
+
+# A polkadot architecture has parachain
+ponto:hasParachain a owl:ObjectProperty ;
+    rdfs:domain ponto:RelayChain ;
+    rdfs:range ponto:Parachain .
+
+# A polkadot architecture has relay chain
+ponto:hasRelayChain a owl:ObjectProperty ;
+    rdfs:domain ponto:PolkadotArchitecture ;
+    rdfs:range ponto:RelayChain .
+
+# A parachain has a lease period
+ponto:hasLease rdfs:domain ponto:Parachain ;
+    rdfs:range ponto:LeasePeriod .
+
+# A parachain has an identifier
+ponto:hasParaId rdfs:domain ponto:Parachain ;
+    rdfs:range ponto:paraid .
+
+# bridge
+ponto:bridgeRelayChain a owl:ObjectProperty ;
+    rdfs:domain ponto:RelayChain ;
+    rdfs:range ponto:Bridge .
+
+ponto:bridgeExternalChain a owl:ObjectProperty ;
+    rdfs:domain ponto:Bridge ;
+    rdfs:range ponto:DistributedLedger .

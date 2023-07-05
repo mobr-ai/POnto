@@ -1,0 +1,77 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# transactions in the Polkadot Ecosystem
+
+ponto:Extrinsic a rdfs:Class ;
+    rdfs:label "Extrinsic" ;
+    rdfs:comment "A SCALE encoded array consisting of a version number, signature, and varying data types indicating the resulting runtime function to be called, including the parameters required for that function to be executed. These state changes are invoked from the outside world, i.e. they are not part of the system itself. Extrinsics can take two forms, 'inherents' and ‘transactions'." ;
+    rdfs:subClassOf ponto:LedgerRecord .
+
+ponto:Remarks a rdfs:Class ;
+    rdfs:label "Remarks" ;
+    rdfs:comment "Remarks are extrinsics with no effect. They provide additional information to external inputs, acting as notes. Remarks are stored alongside block records and do not change the chain's storage; the information is not stored in the chain's trie, but along blocks." ;
+    rdfs:subClassOf ponto:Extrinsic .
+
+ponto:Inherent a rdfs:Class ;
+    rdfs:label "Inherent" ;
+    rdfs:comment "Extrinsics that are 'inherently true'. Inherents are not gossiped on the network and are put into blocks by the block author. They are not provably true the way that the desire to send funds is, therefore they do not carry a signature. A blockchain's runtime must have rules for validating inherents. For example, timestamps are inherents. They are validated by being within some margin that each validator deems reasonable." ;
+    rdfs:subClassOf ponto:LedgerRecord .
+
+ponto:Transaction a rdfs:Class ;
+    rdfs:label "Transaction" ;
+    rdfs:comment "A transaction in the Polkadot blockchain, representing the transfer of assets between two parties." ;
+    rdfs:subClassOf ponto:Extrinsic .
+
+ponto:Sender a rdfs:Class ;
+    rdfs:label "Sender" ;
+    rdfs:comment "The entity sending assets in a Polkadot blockchain transaction." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:Origin a rdfs:Class ;
+    rdfs:label "Origin" ;
+    rdfs:comment "The initiator of an extrinsic. A simple origin would be the account that is sending a token to another account. Polkadot also supports more complex origin types, such as the root origin, from which privileged functions can be called." ;
+    rdfs:subClassOf ponto:Sender .
+
+ponto:Recipient a rdfs:Class ;
+    rdfs:label "Recipient" ;
+    rdfs:comment "The entity receiving assets in a Polkadot blockchain transaction." ;
+    rdfs:subClassOf ponto:Account .
+
+# properties
+ponto:amountTransferred a owl:DatatypeProperty ;
+    rdfs:comment "The amount of assets transferred in a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range xsd:decimal .
+
+ponto:typeOfAsset a owl:DatatypeProperty ;
+    rdfs:comment "The type of asset transferred in a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range xsd:string .
+
+ponto:uniqueID a owl:DatatypeProperty ;
+    rdfs:comment "The unique identification number of a record in the Polkadot blockchain." ;
+    rdfs:domain ponto:LedgerRecord ;
+    rdfs:range xsd:string .
+
+ponto:hasRecord a owl:ObjectProperty ;
+    rdfs:comment "The record associated with a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:LedgerRecord .
+
+ponto:hasSender a owl:ObjectProperty ;
+    rdfs:comment "The sender of a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:Sender .
+
+ponto:hasRecipient a owl:ObjectProperty ;
+    rdfs:comment "The recipient of a Polkadot blockchain transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:Recipient .
+
+ponto:belongsToBlock a owl:ObjectProperty ;
+    rdfs:comment "The block where the transaction is recorded" ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:Block .
