@@ -10,13 +10,18 @@ ponto:Polkadot a ponto:RelayChain ;
     rdfs:label "Polkadot" ;
     rdfs:comment "A heterogeneous, multi-chain network allowing various blockchains of different characteristics to perform arbitrary, cross-chain communication under shared security." ;
     ponto:nettype ponto:mainnet ;
+    ponto:hasParachain ponto:Collectives ;
     ponto:hasParachain ponto:Statemint ;
     ponto:hasParachain ponto:Acala ;
     ponto:hasParachain ponto:Moonbeam ;
     ponto:hasParachain ponto:Astar ;
     ponto:hasParachain ponto:Phala .
 
-ponto:PolkadotAlliance a owl:Thing ;
+ponto:Collectives a ponto:Parachain ;
+    rdfs:label "Collectives" ;
+    rdfs:comment "The Polkadot Collectives parachain was added in Referendum 81 and exists only on Polkadot (i.e., there is no Kusama equivalent). The Collectives chain hosts on-chain collectives that serve the Polkadot network, such as the Fellowship and Polkadot Alliance." .
+
+ponto:PolkadotAlliance a ponto:Collective ;
     rdfs:label "Polkadot Alliance" ;
     rdfs:comment "The Polkadot Alliance is an on-chain collective founded by Acala, Astar, Interlay, Kilt, Moonbeam, Phala, and Subscan, to establish standards and ethics for open-source development in referendum #94. It aims to support development standards and expose bad actors within the ecosystems of Polkadot." .
 

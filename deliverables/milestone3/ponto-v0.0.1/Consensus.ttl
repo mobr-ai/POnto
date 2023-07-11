@@ -36,7 +36,7 @@ ponto:Grandpa a owl:Class ;
 
 ponto:Finality a owl:Class ;
     rdfs:label "Finality" ;
-    rdfs:comment "The property of a block that cannot be reverted. Generally, created blocks are not final until some point in the future - perhaps never, in the case of "probabilistic finality". The Polkadot Relay Chain uses a deterministic finality gadget known as GRANDPA." ;
+    rdfs:comment "The property of a block that cannot be reverted. Generally, created blocks are not final until some point in the future - perhaps never, in the case of 'probabilistic finality'. The Polkadot Relay Chain uses a deterministic finality gadget known as GRANDPA." ;
     rdfs:subClassOf owl:Thing .
 
 ponto:Safety a owl:Class ;
@@ -46,7 +46,7 @@ ponto:Safety a owl:Class ;
 
 ponto:Session a owl:Class ;
     rdfs:label "Session" ;
-    rdfs:comment "A session is a Substrate implementation term for a period that has a constant set of validators. Validators can only join or exit the validator set at a session change." .
+    rdfs:comment "A session is a Substrate implementation term for a period that has a constant set of validators. Validators can only join or exit the validator set at a session change." ;
     rdfs:subClassOf owl:Thing .
 
 ponto:Slashing a owl:Class ;
@@ -132,7 +132,7 @@ ponto:SlotLeader a owl:Class ;
 ponto:Equivocation a owl:Class ;
     rdfs:label "Equivocation" ;
     rdfs:comment "Providing conflicting information to the network. BABE equivocation entails creating multiple blocks in the same slot. GRANDPA equivocation would consist of signing multiple conflicting chains." ;
-    rdfs:subClassOf ponto:Thing .
+    rdfs:subClassOf owl:Thing .
 
 ponto:Liveness a owl:Class ;
     rdfs:label "Liveness" ;
@@ -198,7 +198,7 @@ ponto:hasDuty a rdf:Property ;
     rdfs:range xsd:DutyRoster .
 
 ponto:validatorAtCapacity a owl:ObjectProperty ;
-    rdfs:comment "The maximum number of nominators signalling intent to nominate a validator (and thus could potentially actively nominate that validator in the next session). This maximum number will equal the number of nominators necessary to oversubscribe a validator. Any validator which is "at capacity" or higher may potentially be oversubscribed in the next session; a validator that is not at capacity cannot be oversubscribed unless more nominators select it before the next election." ;
+    rdfs:comment "The maximum number of nominators signalling intent to nominate a validator (and thus could potentially actively nominate that validator in the next session). This maximum number will equal the number of nominators necessary to oversubscribe a validator. Any validator which is 'at capacity' or higher may potentially be oversubscribed in the next session; a validator that is not at capacity cannot be oversubscribed unless more nominators select it before the next election." ;
     rdfs:domain ponto:Validator ;
     rdfs:range ponto:capacity .
 

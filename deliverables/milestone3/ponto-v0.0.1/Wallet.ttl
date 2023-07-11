@@ -3,6 +3,23 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
+# wallet terminology
+ponto:Wallet a owl:Class ;
+    rdfs:label "Wallet" ;
+    rdfs:comment "A program that allows one to store private keys and sign transactions on distributed ledgers" ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:BrowserWallet a owl:Class ;
+    rdfs:label "Browser Wallet" ;
+    rdfs:comment "A wallet that runs in a web browser and can be accessed from any device." ;
+    rdfs:subClassOf ponto:Wallet .
+
+ponto:MobileWallet a owl:Class ;
+    rdfs:label "Mobile Wallet" ;
+    rdfs:comment "A wallet that runs on a mobile device and can be used to make payments on the go." ;
+    rdfs:subClassOf ponto:Wallet .
+
+
 # Polkadot wallet instances
 
 ponto:Enkrypt a ponto:BrowserWallet ;

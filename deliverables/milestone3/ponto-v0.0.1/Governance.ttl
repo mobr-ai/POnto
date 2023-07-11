@@ -4,26 +4,36 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 # governance in the Polkadot Ecosystem
-ponto:GovernanceComponent a owl:Class ;
-    rdfs:label "Governance component" ;
-    rdfs:comment "A technology component that is part of the governance mechanism in the Polkadot ecosystem." ;
-    rdfs:subClassOf ponto:Component .
-
-ponto:Treasury a owl:Class ;
-    rdfs:label "Treasury" ;
-    rdfs:comment "A pool of funds that is used to support the development and maintenance of the Polkadot ecosystem." ;
-    rdfs:subClassOf ponto:GovernanceComponent .
-
 ponto:Governance a owl:Class ;
     rdfs:label "Governance" ;
     rdfs:comment "The process of determining what changes to the network are permissible, such as modifications to code or movement of funds. The governance system in Polkadot is on-chain and revolves around stakeholder voting." ;
-    rdfs:subClassOf ponto:GovernanceComponent .
+    rdfs:subClassOf ponto:Component .
 
-ponto:OnchainGovernance a owl:Class ;
-    rdfs:label "On-chain Governance" ;
-    rdfs:comment "A governance system of a blockchain that is controlled by mechanisms on the blockchain. On-chain governance allows decisions to be made transparently. Note that there are a variety of different algorithms for making these decisions, such as simple majority voting, adaptive quorum biasing, or identity-based quadratic voting." ;
+
+# GovernanceV1
+ponto:GovernanceV1 a owl:Class ;
+    rdfs:label "Governance" ;
+    rdfs:comment "Polkadot's governance system, which ensured the appropriate usage of treasury funds and enabled timely upgrades and fixes." ;
     rdfs:subClassOf ponto:Governance .
 
+ponto:Council a owl:Class ;
+    rdfs:label "Council" ;
+    rdfs:comment "An on-chain entity that consists of several on-chain accounts (starting at 6, eventually moving to the final value of 24). The Council can act as a representative for 'passive' (non-voting) stakeholders. Council members have two main tasks: proposing referenda for the overall stakeholder group to vote on and cancelling malicious referenda." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:TechnicalCommittee a owl:Class ;
+    rdfs:label "Technical Committee" ;
+    rdfs:comment "A technocratic committee to manage upgrade timelines." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:hasGov1Component a owl:ObjectProperty ;
+    rdfs:domain ponto:GovernanceV1 ;
+    rdfs:range ponto:Council ;
+    rdfs:range ponto:TechnicalCommittee ;
+    rdfs:range ponto:AccountHolder .
+
+
+# OpenGov
 ponto:OpenGov a owl:Class ;
     rdfs:label "OpenGov" ;
     rdfs:comment "Previously known as Governance v2 (Gov2) during early development, Polkadot OpenGov serves as the current governance protocol for both Kusama and Polkadot." ;
@@ -32,13 +42,14 @@ ponto:OpenGov a owl:Class ;
 ponto:Fellowship a owl:Class ;
     rdfs:label "Fellowship" ;
     rdfs:comment "A mostly self-governing expert body with a primary goal of representing humans who embody and contain the technical knowledge base of the Kusama and/or Polkadot networks and protocols." ;
-    rdfs:subClassOf ponto:GovernanceComponent .
+    rdfs:subClassOf ponto:Component .
 
-ponto:Council a owl:Class ;
-    rdfs:label "Council" ;
-    rdfs:comment "An on-chain entity that consists of several on-chain accounts (starting at 6, eventually moving to the final value of 24). The Council can act as a representative for "passive" (non-voting) stakeholders. Council members have two main tasks: proposing referenda for the overall stakeholder group to vote on and cancelling malicious referenda." ;
-    rdfs:subClassOf ponto:GovernanceComponent .
+ponto:hasOpenGovComponent a owl:ObjectProperty ;
+    rdfs:domain ponto:OpenGov ;
+    rdfs:range ponto:Fellowship .
 
+
+# Governance entities
 ponto:Proposal a owl:Class ;
     rdfs:label "Proposal" ;
     rdfs:comment "A potential function call to be voted on in a referendum. Proposals modify the behavior of the Polkadot network, from minor parameter tuning up to replacing the runtime code." ;
@@ -65,9 +76,13 @@ ponto:Motion a owl:Class ;
     rdfs:subClassOf ponto:Referendum .
 
 #properties and relationships
+ponto:initiateProposal a owl:ObjectProperty ;
+    rdfs:domain ponto:StakeHolder ;
+    rdfs:range ponto:Proposal .
+
 ponto:voting a owl:ObjectProperty ;
     rdfs:label "Voting" ;
-    rdfs:comment "The process of stakeholders determining whether or not a referendum should pass. Votes are weighted both by the number of DOT that the stakeholder account controls and the amount of time they are willing to lock their DOT." ;
+    rdfs:comment "The process of stake holders determining whether or not a referendum should pass. Votes are weighted both by the number of DOT that the stakeholder account controls and the amount of time they are willing to lock their DOT." ;
     rdfs:domain ponto:StakeHolder ;
     rdfs:range ponto:Referendum .
 
@@ -76,10 +91,6 @@ ponto:tabling a owl:ObjectProperty ;
     rdfs:comment "In Polkadot governance, bringing a proposal to a vote via referendum. Note that this is the British meaning of 'tabling', which is different from the US version, which means 'to postpone' a measure." ;
     rdfs:domain ponto:Proposal ;
     rdfs:range ponto:Referendum .
-
-ponto:hasGovernanceCouncil a owl:ObjectProperty ;
-    rdfs:domain ponto:Governance ;
-    rdfs:range ponto:Council .
 
 ponto:verifyingBounty a owl:ObjectProperty ;
     rdfs:domain ponto:Curator ;
