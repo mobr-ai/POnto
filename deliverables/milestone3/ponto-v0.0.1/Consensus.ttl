@@ -175,15 +175,15 @@ ponto:capacity a xsd:integer ;
     rdfs:comment "The maximum number of nominators signalling intent to nominate a validator (and thus could potentially actively nominate that validator in the next session). This maximum number will equal the number of nominators necessary to oversubscribe a validator. Any validator which is 'at capacity' or higher may potentially be oversubscribed in the next session; a validator that is not at capacity cannot be oversubscribed unless more nominators select it before the next election." .
 
 # relationships
-ponto:producesProof a rdf:Property ;
+ponto:producesProof a owl:ObjectProperty ;
     rdfs:domain ponto:Collator ;
     rdfs:range ponto:ProofOfValidity .
 
-ponto:hasTimeSlot a rdf:Property ;
+ponto:hasTimeSlot a owl:ObjectProperty ;
     rdfs:domain ponto:Epoch ;
     rdfs:range xsd:EpochTimeSlot .
 
-ponto:hasSlotLeader a rdf:Property ;
+ponto:hasSlotLeader a owl:ObjectProperty ;
     rdfs:domain ponto:EpochTimeSlot ;
     rdfs:range xsd:SlotLeader .
 
@@ -193,14 +193,20 @@ ponto:blocksNomination a rdf:Property ;
     rdfs:domain ponto:Validator ;
     rdfs:range xsd:boolean .
 
-ponto:hasDuty a rdf:Property ;
+ponto:hasDuty a owl:ObjectProperty ;
     rdfs:domain ponto:Validator ;
-    rdfs:range xsd:DutyRoster .
+    rdfs:range ponto:DutyRoster .
 
 ponto:validatorAtCapacity a owl:ObjectProperty ;
     rdfs:comment "The maximum number of nominators signalling intent to nominate a validator (and thus could potentially actively nominate that validator in the next session). This maximum number will equal the number of nominators necessary to oversubscribe a validator. Any validator which is 'at capacity' or higher may potentially be oversubscribed in the next session; a validator that is not at capacity cannot be oversubscribed unless more nominators select it before the next election." ;
     rdfs:domain ponto:Validator ;
-    rdfs:range ponto:capacity .
+    rdfs:range xsd:integer .
+
+ponto:validatorAtCapacity rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:capacity
+] .
 
 ponto:hasValidator a owl:ObjectProperty ;
     rdfs:domain ponto:Collator ;

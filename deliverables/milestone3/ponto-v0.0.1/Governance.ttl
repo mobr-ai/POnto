@@ -13,12 +13,12 @@ ponto:Governance a owl:Class ;
 # GovernanceV1
 ponto:GovernanceV1 a owl:Class ;
     rdfs:label "Governance" ;
-    rdfs:comment "Polkadot's governance system, which ensured the appropriate usage of treasury funds and enabled timely upgrades and fixes." ;
+    rdfs:comment "Former Polkadot's governance system, which ensured the appropriate usage of treasury funds and enabled timely upgrades and fixes." ;
     rdfs:subClassOf ponto:Governance .
 
 ponto:Council a owl:Class ;
     rdfs:label "Council" ;
-    rdfs:comment "An on-chain entity that consists of several on-chain accounts (starting at 6, eventually moving to the final value of 24). The Council can act as a representative for 'passive' (non-voting) stakeholders. Council members have two main tasks: proposing referenda for the overall stakeholder group to vote on and cancelling malicious referenda." ;
+    rdfs:comment "An on-chain entity comprising several actors, each represented as an on-chain account, which was part of Polkadot's GovernanceV1." ;
     rdfs:subClassOf ponto:Component .
 
 ponto:TechnicalCommittee a owl:Class ;
@@ -139,29 +139,59 @@ ponto:minSupport a xsd:integer ;
     rdfs:label "Min Support" ;
     rdfs:comment "The threshold of support (along with the min approval) needed for a proposal to meet the requirements of the confirm period." .
 
-ponto:hasTrackId a owl:ObjectProperty ;
+ponto:hasTrackId a rdf:Property ;
     rdfs:domain ponto:Track ;
-    rdfs:range ponto:trackId .
+    rdfs:range xsd:integer .
+
+ponto:hasTrackId rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:trackId
+] .
 
 ponto:hasTrackOrigin a owl:ObjectProperty ;
     rdfs:domain ponto:Track ;
     rdfs:range ponto:Origin .
 
-ponto:hasMaxDeciding a owl:ObjectProperty ;
+ponto:hasMaxDeciding a rdf:Property ;
     rdfs:domain ponto:Track ;
-    rdfs:range ponto:maxDeciding .
+    rdfs:range xsd:integer .
 
-ponto:hasPreparePeriod a owl:ObjectProperty ;
-    rdfs:domain ponto:Track ;
-    rdfs:range ponto:preparePeriod .
+ponto:hasMaxDeciding rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:maxDeciding
+] .
 
-ponto:hasDecisionDeposit a owl:ObjectProperty ;
+ponto:hasPreparePeriod a rdf:Property ;
     rdfs:domain ponto:Track ;
-    rdfs:range ponto:decisionDeposit .
+    rdfs:range owl:integer .
 
-ponto:hasConfirmPeriod a owl:ObjectProperty ;
+ponto:hasPreparePeriod rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:preparePeriod
+] .
+
+ponto:hasDecisionDeposit a rdf:Property ;
     rdfs:domain ponto:Track ;
-    rdfs:range ponto:confirmationPeriod .
+    rdfs:range xsd:float .
+
+ponto:hasDecisionDeposit rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:decisionDeposit
+] .
+
+ponto:hasConfirmPeriod a rdf:Property ;
+    rdfs:domain ponto:Track ;
+    rdfs:range xsd:integer .
+
+ponto:hasConfirmPeriod rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:confirmationPeriod
+] .
 
 # Governance entities
 ponto:Proposal a owl:Class ;
@@ -196,12 +226,15 @@ ponto:confirmation a xsd:string ;
 ponto:enactment a xsd:string ;
     rdfs:label "Enactment" .
 
-ponto:currentReferendumPeriod a owl:ObjectProperty ;
+ponto:currentReferendumPeriod a rdf:Property ;
     rdfs:domain ponto:Referendum ;
-    rdfs:range ponto:leadin ;
-    rdfs:range ponto:deciding ;
-    rdfs:range ponto:confirmation ;
-    rdfs:range ponto:enactment .
+    rdfs:range xsd:string .
+
+ponto:currentReferendumPeriod rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:leadin, ponto:deciding, ponto:confirmation, ponto:enactment
+] .
 
 ponto:Motion a owl:Class ;
     rdfs:label "Motion" ;

@@ -48,26 +48,26 @@ ponto:ParachainRegistry a owl:Class ;
     rdfs:comment "A relatively simple database-like construct that holds both static and dynamic information on each chain." ;
     rdfs:subClassOf owl:Thing .
 
-ponto:paraid a xsd:string ;
+ponto:paraId a xsd:string ;
     rdfs:label "ParaId" ;
     rdfs:comment "A unique numeric (non-negative integer) identifier for a parachain." .
 
-ponto:nettype a rdf:Property ;
+ponto:hasNetType a rdf:Property ;
         rdfs:domain ponto:DistributedLedger ;
         rdfs:range xsd:string .
 
-ponto:mainnet a xsd:string ;
+ponto:mainNet a xsd:string ;
     rdfs:label "mainnet" ;
     rdfs:comment "A distributed ledger fully developed and deployed where transactions are broadcasted, verified, and recorded." .
 
-ponto:testnet a xsd:string ;
+ponto:testNet a xsd:string ;
     rdfs:label "testnet" ;
     rdfs:comment "A distributed ledger to be used for testing and experimentation without risk to real funds or the main network." .
 
-ponto:nettype rdfs:subPropertyOf [
+ponto:hasNetType rdfs:subPropertyOf [
         rdf:type owl:FunctionalProperty ;
         owl:inverseOf owl:hasValue ;
-        owl:hasValue ponto:mainnet, ponto:testnet
+        owl:hasValue ponto:mainNet, ponto:testNet
 ] .
 
 ponto:Bridge a owl:Class ;
@@ -224,8 +224,15 @@ ponto:hasLease rdfs:domain ponto:Parachain ;
     rdfs:range ponto:LeasePeriod .
 
 # A parachain has an identifier
-ponto:hasParaId rdfs:domain ponto:Parachain ;
-    rdfs:range ponto:paraid .
+ponto:hasParaId a rdf:Property ;
+        rdfs:domain ponto:Parachain ;
+        rdfs:range xsd:integer .
+
+ponto:hasParaId rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:paraId
+] .
 
 # bridge
 ponto:bridgeRelayChain a owl:ObjectProperty ;
