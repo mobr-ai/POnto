@@ -17,8 +17,8 @@
 	dc:creator "MOBR Systems" ;
 	dc:title "POnto - An ontology for the Polkadot ecosystem" ;
 	vann:preferredNamespacePrefix "ponto" ;
-	rdfs:comment "This Polkadot ontology specification uses W3C RDF Schema and the Web Ontology Language. Its main source of information comes from the Polkadot Whitepaper written by Dr. Gavin Wood."@en ;
-	rdfs:seeAlso <https://github.com/mobr-ai/POnto> , <https://polkadot.network/whitepaper/> ;
+	rdfs:comment "This Polkadot ontology specification uses W3C RDF Schema and the Web Ontology Language. Its main source of information comes from discussions with the Polkadot community and official documentation."@en ;
+	rdfs:seeAlso <https://github.com/mobr-ai/POnto> , <https://wiki.polkadot.network/> ;
 	owl:versionInfo "0.0.1" ;
 	ns:term_status "unstable" ;
     dc:license <https://www.apache.org/licenses/LICENSE-2.0> .

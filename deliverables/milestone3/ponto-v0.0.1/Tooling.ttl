@@ -9,6 +9,10 @@ ponto:Ink a ponto:ProgrammingLanguage ;
     rdfs:label "Ink!" ;
     rdfs:comment "ink! is an eDSL (Embedded Domain Specific Language) to write smart contracts in Rust for blockchains built on the Substrate framework. ink! contracts are compiled to WebAssembly." .
 
+ponto:Frontier a ponto:Runtime ;
+    rdfs:label "Frontier" ;
+    rdfs:comment "Is the suite that provides an Ethereum compatibility layer for Substrate. It allows you to run EVM contracts natively in Substrate, tightly integrated with the rest of the Substrate ecosystem." .
+
 ponto:Wasm a ponto:VirtualMachine ;
     rdfs:label "WebAssembly" ;
     rdfs:comment "WebAssembly (abbreviated Wasm) is an instruction format for a virtual, stack-based machine. Polkadot Runtime Modules are compiled to WebAssembly. Also known as Wasm." ;

@@ -33,6 +33,16 @@ ponto:Account a owl:Class ;
     rdfs:comment "An address or a record on the blockchain that is used to store and manage cryptocurrency holdings or other types of assets." ;
     rdfs:subclasses ponto:LedgerRecord .
 
+ponto:MultisigAccount a owl:Class ;
+    rdfs:label "Multi-signature Account" ;
+    rdfs:comment "A multisig is composed of one or more addresses and a threshold. The threshold defines how many signatories (participating addresses) need to agree on submitting an extrinsic for the call to be successful." ;
+    rdfs:subclasses ponto:Account .
+
+ponto:ProxyAccount a owl:Class ;
+    rdfs:label "Proxy Account" ;
+    rdfs:comment "Proxies are allowed to perform a limited amount of actions related to specific substrate pallets on behalf of another account." ;
+    rdfs:subclasses ponto:Account .
+
 ponto:ExternalAccount a owl:Class ;
     rdfs:label "External Account" ;
     rdfs:comment "An account that is controlled by an external system, such as an exchange or custodian." ;
