@@ -33,6 +33,11 @@ ponto:XCM a owl:Class ;
     rdfs:comment "The Cross-Consensus Message Format, or XCM, is a messaging format and language used to communicate between consensus systems." ;
     rdfs:subClassOf owl:Thing .
 
+ponto:XCMChannel a owl:Class ;
+    rdfs:label "XCM Channel" ;
+    rdfs:comment "Represents a communication pathway between two or more Parachains or between a Parachain and the Relay Chain. It allows for the exchange of messages, instructions, and assets across different chains, facilitating inter-chain communication." ;
+    rdfs:subClassOf owl:Thing .
+
 ponto:LeasePeriod a owl:Class ;
     rdfs:label "Lease Period" ;
     rdfs:comment "A particular amount of time that a parachain for which the parachain can connect to the Relay Chain." ;
@@ -242,3 +247,12 @@ ponto:bridgeRelayChain a owl:ObjectProperty ;
 ponto:bridgeExternalChain a owl:ObjectProperty ;
     rdfs:domain ponto:Bridge ;
     rdfs:range ponto:DistributedLedger .
+
+# a distributed ledger may have pull requests
+ponto:hasPR a owl:ObjectProperty ;
+    rdfs:domain ponto:DistributedLedger ;
+    rdfs:range ponto:PullRequest .
+
+ponto:openPRs a rdf:Property ;
+        rdfs:domain ponto:DistributedLedger ;
+        rdfs:range xsd:integer .

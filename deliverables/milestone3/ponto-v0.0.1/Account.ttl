@@ -89,22 +89,40 @@ ponto:Teleport a owl:Class ;
     rdfs:subClassOf owl:Thing .
 
 # relationships
-ponto:bonding a owl:ObjectProperty ;
+ponto:bonding a rdf:Property ;
     rdfs:comment "A process by which tokens can be 'frozen' in exchange for some other benefit. For example, staking is a form of bonding for which you receive rewards in exchange for securing the network. You can also bond tokens in exchange for a parachain slot." ;
     rdfs:domain ponto:Token ;
-    rdfs:range xsd:float .
+    rdfs:range xsd:decimal .
 
+# a wallet has one or more accounts
+ponto:hasAccount a owl:ObjectProperty ;
+    rdfs:domain ponto:Wallet ;
+    rdfs:range ponto:Account .
+
+ponto:hasAccount owl:inverseOf ponto:isAccountOf .
+
+ponto:accountCreated a owl:DatatypeProperty ;
+    rdfs:comment "The timestamp when the account was created." ;
+    rdfs:domain ponto:Account ;
+    rdfs:range xsd:dateTimeStamp .
+
+# an account has one or more types of tokens
 ponto:hasToken a owl:ObjectProperty ;
     rdfs:domain ponto:Account ;
     rdfs:range ponto:Token .
 
-ponto:hasToken owl:inverseOf ponto:belongsTo .
+# ballance of a token in an account of a wallet
+ponto:hasBalance a rdf:Property ;
+    rdfs:domain ponto:Token ;
+    rdfs:range xsd:decimal .
 
-#individuals
-ponto:DOT a ponto:NativeToken ;
+# native tokens
+ponto:DOT a owl:Class ;
     rdfs:label "DOT" ;
-    rdfs:comment "The native token for Polkadot. DOT serves three purposes: network governance (allowing them to vote on-chain upgrades and other exceptional events), general operation (rewarding good actors and punishing bad actors), and bonding (adding new parachains by 'freezing' DOT while they are connected the Relay Chain)." .
+    rdfs:comment "The native token for Polkadot. DOT serves three purposes: network governance (allowing them to vote on-chain upgrades and other exceptional events), general operation (rewarding good actors and punishing bad actors), and bonding (adding new parachains by 'freezing' DOT while they are connected the Relay Chain)." ;
+    rdfs:subClassOf ponto:NativeToken .
 
-ponto:KSM a ponto:NativeToken ;
+ponto:KSM a owl:Class ;
     rdfs:label "KSM" ;
-    rdfs:comment "The abbreviation for Kusama network tokens" .
+    rdfs:comment "The abbreviation for Kusama network tokens" ;
+    rdfs:subClassOf ponto:NativeToken .

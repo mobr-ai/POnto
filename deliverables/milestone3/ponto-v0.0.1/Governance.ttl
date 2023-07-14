@@ -91,11 +91,11 @@ ponto:hasOpenGovComponent a owl:ObjectProperty ;
 ponto:trackId a xsd:integer ;
     rdfs:label "Track Id" .
 
-ponto:submissionDeposit a xsd:float ;
+ponto:submissionDeposit a xsd:decimal ;
     rdfs:label "Submission Deposit" ;
     rdfs:comment "The minimum amount to be used as a (refundable) deposit to submit a public referendum proposal." .
 
-ponto:decisionDeposit a xsd:float ;
+ponto:decisionDeposit a xsd:decimal ;
     rdfs:label "Decision Deposit" ;
     rdfs:comment "This deposit is required for a referendum to progress to the decision phase after the end of prepare period." .
 
@@ -119,15 +119,15 @@ ponto:maxDeciding a xsd:integer ;
     rdfs:label "Max Deciding" ;
     rdfs:comment "The maximum number of referenda that can be in the decision period of a track all at once." .
 
-ponto:conviction a xsd:float ;
+ponto:conviction a xsd:decimal ;
     rdfs:label "Conviction" ;
     rdfs:comment "A multiplier to increase voting power." .
 
-ponto:approval a xsd:float ;
+ponto:approval a xsd:decimal ;
     rdfs:label "Approval" ;
     rdfs:comment "The share of the approval vote-weight after adjustments for conviction against the total number of vote-weight for both approval and rejection." .
 
-ponto:minApproval a xsd:float ;
+ponto:minApproval a xsd:decimal ;
     rdfs:label "Min Approval" ;
     rdfs:comment "The threshold of approval (along with the min support) needed for a proposal to meet the requirements of the confirm period." .
 
@@ -175,7 +175,7 @@ ponto:hasPreparePeriod rdfs:subPropertyOf [
 
 ponto:hasDecisionDeposit a rdf:Property ;
     rdfs:domain ponto:Track ;
-    rdfs:range xsd:float .
+    rdfs:range xsd:decimal .
 
 ponto:hasDecisionDeposit rdfs:subPropertyOf [
         rdf:type owl:FunctionalProperty ;

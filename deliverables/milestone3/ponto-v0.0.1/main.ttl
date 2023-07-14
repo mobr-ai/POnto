@@ -112,6 +112,16 @@ ponto:Metadata a owl:Class ;
     rdfs:comment "Data that includes information about other data, such as information about a specific transaction." ;
     rdfs:subClassOf owl:Thing .
 
+ponto:TVL a owl:Class ;
+    rdfs:label "Total Value Locked" ;
+    rdfs:comment "Total Value Locked (TVL) is a metric used to measure the total value of digital assets that are locked or staked." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:PullRequest a owl:Class ;
+    rdfs:label "Pull Request" ;
+    rdfs:comment "Pull requests let you tell others about changes you've pushed to a branch in a git repository. Once a pull request is opened, you can discuss and review the potential changes with collaborators and add follow-up commits before your changes are merged into the base branch." ;
+    rdfs:subClassOf owl:Thing .
+
 ponto:Dapp a owl:Class ;
     rdfs:label "Descentralized Application" ;
     rdfs:comment "Software application that runs as part of a distributed network as opposed to being run on a specific system or set of systems." ;
@@ -177,12 +187,3 @@ ponto:FRAME a owl:Class ;
     rdfs:label "FRAME" ;
     rdfs:comment "The collection of Substrate-provided pallets" ;
     ponto:subClassOf ponto:Substrate .
-
-# Defining Relationships
-
-#account
-ponto:hasAccount a owl:ObjectProperty ;
-    rdfs:domain ponto:Wallet ;
-    rdfs:range ponto:Account .
-
-ponto:hasAccount owl:inverseOf ponto:isAccountOf .

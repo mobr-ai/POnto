@@ -46,6 +46,11 @@ ponto:typeOfAsset a owl:DatatypeProperty ;
     rdfs:domain ponto:Transaction ;
     rdfs:range xsd:string .
 
+ponto:timestamp a owl:DatatypeProperty ;
+    rdfs:comment "The timestamp of the transaction." ;
+    rdfs:domain ponto:Transaction ;
+    rdfs:range xsd:dateTimeStamp .
+
 ponto:uniqueID a owl:DatatypeProperty ;
     rdfs:comment "The unique identification number of a record in the Polkadot blockchain." ;
     rdfs:domain ponto:LedgerRecord ;

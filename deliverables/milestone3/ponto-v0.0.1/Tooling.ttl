@@ -11,7 +11,7 @@ ponto:Ink a ponto:ProgrammingLanguage ;
 
 ponto:Frontier a ponto:Runtime ;
     rdfs:label "Frontier" ;
-    rdfs:comment "Is the suite that provides an Ethereum compatibility layer for Substrate. It allows you to run EVM contracts natively in Substrate, tightly integrated with the rest of the Substrate ecosystem." .
+    rdfs:comment "Frontier is the suite that provides an Ethereum compatibility layer for Substrate. It allows you to run EVM contracts natively in Substrate, tightly integrated with the rest of the Substrate ecosystem." .
 
 ponto:Wasm a ponto:VirtualMachine ;
     rdfs:label "WebAssembly" ;
