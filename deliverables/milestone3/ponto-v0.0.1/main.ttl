@@ -107,6 +107,11 @@ ponto:ProgrammingLanguage a owl:Class ;
     rdfs:comment "A system of notation for writing computer programs." ;
     rdfs:subClassOf ponto:Component .
 
+ponto:DistributedLedger a owl:Class ;
+    rdfs:label "Distributed Ledger" ;
+    rdfs:comment "A decentralized and distributed digital ledger that is implemented by a network of computers (nodes) that participate in the network." ;
+    rdfs:subClassOf ponto:Component .
+
 ponto:Metadata a owl:Class ;
     rdfs:label "Metadata" ;
     rdfs:comment "Data that includes information about other data, such as information about a specific transaction." ;
@@ -142,10 +147,41 @@ ponto:hasComponent a owl:ObjectProperty ;
     rdfs:domain ponto:Architecture ;
     rdfs:range ponto:Component .
 
+# a distributed ledger may have pull requests
+ponto:hasPR a owl:ObjectProperty ;
+    rdfs:domain ponto:DistributedLedger ;
+    rdfs:range ponto:PullRequest .
+
+# A pull request has an opening date
+ponto:opened a owl:DatatypeProperty ;
+    rdfs:comment "The timestamp when the pull request was opened." ;
+    rdfs:domain ponto:PullRequest ;
+    rdfs:range xsd:dateTimeStamp .
+
 ponto:BitfieldArray a owl:Class ;
     rdfs:label "Bitfield Array" ;
     rdfs:comment "A bitfield array contains single-bit values which indicate whether a candidate is available. The number of items is equal of to the number of availability cores and each bit represents a vote on the corresponding core in the given order." ;
     rdfs:subClassOf ponto:Component .
+
+# wallet terminology
+ponto:Wallet a owl:Class ;
+    rdfs:label "Wallet" ;
+    rdfs:comment "A program that allows one to store private keys and sign transactions on distributed ledgers" ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:BrowserWallet a owl:Class ;
+    rdfs:label "Browser Wallet" ;
+    rdfs:comment "A wallet that runs in a web browser and can be accessed from any device." ;
+    rdfs:subClassOf ponto:Wallet .
+
+ponto:MobileWallet a owl:Class ;
+    rdfs:label "Mobile Wallet" ;
+    rdfs:comment "A wallet that runs on a mobile device and can be used to make payments on the go." ;
+    rdfs:subClassOf ponto:Wallet .
+
+#relationships
+ponto:hasWallet rdfs:domain ponto:AccountHolder ;
+    rdfs:range ponto:Wallet .
 
 # person or organization
 ponto:AccountHolder a owl:Class ;

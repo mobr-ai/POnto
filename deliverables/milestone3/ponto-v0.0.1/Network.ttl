@@ -120,11 +120,6 @@ ponto:PolkadotArchitecture a owl:Class ;
     rdfs:comment "An architecture based on a multichain network that includes several different types of chains, each with its own specific purpose and functionality. The core of the architecture is a relay chain that facilitates communication with parachains and parathreads." ;
     rdfs:subClassOf ponto:LedgerArchitecture .
 
-ponto:DistributedLedger a owl:Class ;
-    rdfs:label "Distributed Ledger" ;
-    rdfs:comment "A decentralized and distributed digital ledger that is implemented by a network of computers (nodes) that participate in the network." ;
-    rdfs:subClassOf ponto:Component .
-
 ponto:LedgerRecord a owl:Class ;
     rdfs:label "Ledger Record" ;
     rdfs:comment "A digital record that contains information about a specific event or transaction that has occurred on the blockchain." ;
@@ -247,12 +242,3 @@ ponto:bridgeRelayChain a owl:ObjectProperty ;
 ponto:bridgeExternalChain a owl:ObjectProperty ;
     rdfs:domain ponto:Bridge ;
     rdfs:range ponto:DistributedLedger .
-
-# a distributed ledger may have pull requests
-ponto:hasPR a owl:ObjectProperty ;
-    rdfs:domain ponto:DistributedLedger ;
-    rdfs:range ponto:PullRequest .
-
-ponto:openPRs a rdf:Property ;
-        rdfs:domain ponto:DistributedLedger ;
-        rdfs:range xsd:integer .

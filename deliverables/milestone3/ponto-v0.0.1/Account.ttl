@@ -3,7 +3,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-# Tokens and related subjects like account entity in the Polkadot Ecosystem
+# Tokens and related subjects like account in the Polkadot Ecosystem
 
 # tokens
 ponto:Token a owl:Class ;
@@ -26,7 +26,7 @@ ponto:NativeToken a owl:Class ;
     rdfs:comment "The primary token used as the currency in a blockchain ecosystem, typically issued by the blockchain protocol itself." ;
     rdfs:subClassOf ponto:FungibleToken .
 
-# account types
+# account and account types
 
 ponto:Account a owl:Class ;
     rdfs:label "Account" ;
