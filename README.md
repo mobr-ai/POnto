@@ -1,7 +1,7 @@
 # POnto:  An ontology for the Polkadot multichain ecosystem
 POnto is a Polkadot ontology designed to represent and relate the main entities of the ecosystem. Besides being a contraction of Polkadot Ontology, "POnto" has inspiration on the meaning of the word *ponto* in Portuguese, which can be translated to both point and *dot*. POnto's focus is to support developers, researchers, and enthusiasts to enhance data analysis, communicability and domain knowledge sharing within the Polkadot community.
 
-A draft version of it was initially based on Polkadot's [whitepaper](https://assets.polkadot.network/Polkadot-whitepaper.pdf). Afterwards, POnto was subsequently enriched according to discussions with domain experts and latest documentation available. As part of a conceptual framework, POnto was designed as a modular ontology organized hierarchically and provides a representation of different aspects and features of the Polkadot ecosystem. POnto is a structured representation of the ecosystem's fundamental components, concepts, and relationships.
+A draft version of it was initially based on Polkadot's [whitepaper](https://assets.polkadot.network/Polkadot-whitepaper.pdf). Afterwards, POnto was subsequently enriched according to discussions with domain experts and latest [documentation](https://wiki.polkadot.network/) available. As part of a conceptual framework, POnto was designed as a modular ontology organized hierarchically and provides a representation of different aspects and features of the Polkadot ecosystem. POnto is a structured representation of the ecosystem's fundamental components, concepts, and relationships.
 
 
 
