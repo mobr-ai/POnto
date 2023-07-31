@@ -25,4 +25,4 @@ The other three modules (Ledger, Tooling, and Wallet) aim at representing key in
 ![POnto](https://github.com/mobr-ai/POnto/assets/779451/1bc8066a-2474-4818-992f-64cbad28da02)
 
 # License
-All the ontology Turtle files and other code that may be created are licensed under Apache 2.0. All the available PDF documents are under CC-SA license.
+All the ontology Turtle files and other code that may be created are licensed under Apache 2.0. All the available PDF documents are under [CC-SA license](https://creativecommons.org/licenses/by-sa/2.0/).
