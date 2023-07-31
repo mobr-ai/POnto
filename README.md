@@ -20,7 +20,7 @@ The Stake module describes staking mechanisms of the ecosystem. It covers concep
 
 The Transaction module focuses on the representation and processing of transactions. It includes concepts such as extrinsics (representing transaction data), senders and recipients of transactions, transaction properties (e.g., amount transferred, asset type), and the association of transactions with ledger records and blocks. 
 
-The other three modules (Ledger, Tooling, and Wallet) aim at representing key individuals of the ecosystem to exemplify the use of the ontology. The Ledger module specifies the Polkadot and Kusama relay chains and some of their parachains, like Acala and Moonbean for Polkadot and Statemine for Kusama. The Tooling module encompasses individuals to represent various tools of the ecosystem, including libraries, and development frameworks available for building applications. Individuals representing essential wallets of the ecosystem are part of the Wallet module.
+The other three modules (Ledger, Tooling, and Wallet) aim at representing key individuals of the ecosystem to exemplify the use of the ontology. The Ledger module specifies the Polkadot and Kusama relay chains and some of their parachains, like Acala and Moonbeam for Polkadot and Statemine for Kusama. The Tooling module encompasses individuals to represent various tools of the ecosystem, including libraries, and development frameworks available for building applications. Individuals representing essential wallets of the ecosystem are part of the Wallet module.
 
 ![POnto](https://github.com/mobr-ai/POnto/assets/779451/1bc8066a-2474-4818-992f-64cbad28da02)
 
