@@ -56,11 +56,6 @@ ponto:uniqueID a owl:DatatypeProperty ;
     rdfs:domain ponto:LedgerRecord ;
     rdfs:range xsd:string .
 
-ponto:hasRecord a owl:ObjectProperty ;
-    rdfs:comment "The record associated with a Polkadot blockchain transaction." ;
-    rdfs:domain ponto:Transaction ;
-    rdfs:range ponto:LedgerRecord .
-
 ponto:hasSender a owl:ObjectProperty ;
     rdfs:comment "The sender of a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
@@ -70,8 +65,3 @@ ponto:hasRecipient a owl:ObjectProperty ;
     rdfs:comment "The recipient of a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range ponto:Recipient .
-
-ponto:belongsToBlock a owl:ObjectProperty ;
-    rdfs:comment "The block where the transaction is recorded" ;
-    rdfs:domain ponto:Transaction ;
-    rdfs:range ponto:Block .
