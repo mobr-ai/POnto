@@ -1,0 +1,128 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Tokens and related subjects like account in the Polkadot Ecosystem
+
+# tokens
+ponto:Token a owl:Class ;
+    rdfs:label "Token" ;
+    rdfs:comment "A unit of value that is used to represent assets on a distributed ledger." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:FungibleToken a owl:Class ;
+    rdfs:label "Fungible Token" ;
+    rdfs:comment "Divisible interchengable and non-unique token" ;
+    rdfs:subClassOf ponto:Token .
+
+ponto:NFT a owl:Class ;
+    rdfs:label "Non-fungible Token" ;
+    rdfs:comment "A non-fungible token is a token that does not hold the property of fungibility, which, in turn, means that it cannot be interchangeable and indistinguishable from other tokens. NFTs allow the tokenization of unique items and provide exclusive ownership for those tokens." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:NativeToken a owl:Class ;
+    rdfs:label "Native Token" ;
+    rdfs:comment "The primary token used as the currency in a blockchain ecosystem, typically issued by the blockchain protocol itself." ;
+    rdfs:subClassOf ponto:FungibleToken .
+
+# account and account types
+
+ponto:Account a owl:Class ;
+    rdfs:label "Account" ;
+    rdfs:comment "An address or a record on the blockchain that is used to store and manage cryptocurrency holdings or other types of assets." ;
+    rdfs:subclasses ponto:LedgerRecord .
+
+ponto:MultisigAccount a owl:Class ;
+    rdfs:label "Multi-signature Account" ;
+    rdfs:comment "A multisig is composed of one or more addresses and a threshold. The threshold defines how many signatories (participating addresses) need to agree on submitting an extrinsic for the call to be successful." ;
+    rdfs:subclasses ponto:Account .
+
+ponto:ProxyAccount a owl:Class ;
+    rdfs:label "Proxy Account" ;
+    rdfs:comment "Proxies are allowed to perform a limited amount of actions related to specific substrate pallets on behalf of another account." ;
+    rdfs:subclasses ponto:Account .
+
+ponto:ExternalAccount a owl:Class ;
+    rdfs:label "External Account" ;
+    rdfs:comment "An account that is controlled by an external system, such as an exchange or custodian." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:InjectedAccount a owl:Class ;
+    rdfs:label "Injected Account" ;
+    rdfs:comment "An account that is not directly managed by the Polkadot UI but can be accessed through it, such as accounts controlled by the Polkadot{.js} extension." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:NodeAccount a owl:Class ;
+    rdfs:label "Node Account" ;
+    rdfs:comment "An account that is used by a node to participate in block production or validation." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:SmartContract a owl:Class ;
+    rdfs:label "Smart Contract" ;
+    rdfs:comment "A self-executing contract that is stored on the blockchain and can interact with other contracts or accounts." ;
+    rdfs:subClassOf ponto:Account .
+
+ponto:CommunityQueue a owl:Class ;
+    rdfs:label "Community Queue" ;
+    rdfs:comment "The queue for proposals originating from individual accounts (i.e. not the Council) which are waiting to become referenda. Compare the External queue." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:ExternalQueue a owl:Class ;
+    rdfs:label "External Queue" ;
+    rdfs:comment "The queue for proposals originating with the Polkadot Council which are waiting to become referenda. Compare the Community queue." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Crowdloan a owl:Class ;
+    rdfs:label "Crowdloan" ;
+    rdfs:comment "A mechanism for potential parachains to temporarily source tokens to win an auction for a parachain slot. Tokens gathered in this way are programmatically returned to the lender after the lease period is over or the crowdloan period ends." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:KeepAliveCheck a owl:Class ;
+    rdfs:label "Keep-Alive Check" ;
+    rdfs:comment "The keep-alive check is used to indicate whether or not a transfer can allow the sending account to be reduced to less than the existential deposit, causing it to be reaped." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Teleport a owl:Class ;
+    rdfs:label "Teleport" ;
+    rdfs:comment "Send an asset from an account on one chain to an account on a different chain. This occurs by burning an amount on the sending chain and minting an equivalent amount on the destination chain." ;
+    rdfs:subClassOf owl:Thing .
+
+# relationships
+ponto:bonding a rdf:Property ;
+    rdfs:comment "A process by which tokens can be 'frozen' in exchange for some other benefit. For example, staking is a form of bonding for which you receive rewards in exchange for securing the network. You can also bond tokens in exchange for a parachain slot." ;
+    rdfs:domain ponto:Token ;
+    rdfs:range xsd:decimal .
+
+# a wallet has one or more accounts
+ponto:hasAccount a owl:ObjectProperty ;
+    rdfs:domain ponto:Wallet ;
+    rdfs:range ponto:Account .
+
+ponto:hasAccount owl:inverseOf ponto:isAccountOf .
+
+ponto:accountCreated a owl:DatatypeProperty ;
+    rdfs:comment "The timestamp when the account was created." ;
+    rdfs:domain ponto:Account ;
+    rdfs:range xsd:dateTimeStamp .
+
+# an account has one or more types of tokens
+ponto:hasToken a owl:ObjectProperty ;
+    rdfs:domain ponto:Account ;
+    rdfs:range ponto:Token .
+
+# ballance of a token in an account of a wallet
+ponto:hasBalance a rdf:Property ;
+    rdfs:domain ponto:Token ;
+    rdfs:range xsd:decimal .
+
+# native tokens
+ponto:DOT a owl:Class ;
+    rdfs:label "DOT" ;
+    rdfs:comment "The native token for Polkadot. DOT serves three purposes: network governance (allowing them to vote on-chain upgrades and other exceptional events), general operation (rewarding good actors and punishing bad actors), and bonding (adding new parachains by 'freezing' DOT while they are connected the Relay Chain)." ;
+    rdfs:subClassOf ponto:NativeToken .
+
+ponto:KSM a owl:Class ;
+    rdfs:label "KSM" ;
+    rdfs:comment "The abbreviation for Kusama network tokens" ;
+    rdfs:subClassOf ponto:NativeToken .

@@ -1,0 +1,82 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# distributed and decentralized ledgers that are part of or related to the Polkadot Ecosystem
+
+# polkadot
+ponto:Polkadot a ponto:RelayChain ;
+    rdfs:label "Polkadot" ;
+    rdfs:comment "A heterogeneous, multi-chain network allowing various blockchains of different characteristics to perform arbitrary, cross-chain communication under shared security." ;
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParachain ponto:Collectives ;
+    ponto:hasParachain ponto:Statemint ;
+    ponto:hasParachain ponto:Acala ;
+    ponto:hasParachain ponto:Moonbeam ;
+    ponto:hasParachain ponto:Astar ;
+    ponto:hasParachain ponto:Phala .
+
+ponto:Collectives a ponto:Parachain ;
+    rdfs:label "Collectives" ;
+    rdfs:comment "The Polkadot Collectives parachain was added in Referendum 81 and exists only on Polkadot (i.e., there is no Kusama equivalent). The Collectives chain hosts on-chain collectives that serve the Polkadot network, such as the Fellowship and Polkadot Alliance." .
+
+ponto:PolkadotAlliance a ponto:Collective ;
+    rdfs:label "Polkadot Alliance" ;
+    rdfs:comment "The Polkadot Alliance is an on-chain collective founded by Acala, Astar, Interlay, Kilt, Moonbeam, Phala, and Subscan, to establish standards and ethics for open-source development in referendum #94. It aims to support development standards and expose bad actors within the ecosystems of Polkadot." .
+
+ponto:Statemint a ponto:Parachain ;
+    rdfs:label "Statemint" ;
+    rdfs:comment "A generic assets parachain which provides functionality for deploying and transferring assets — both Fungible and Non-Fungible Tokens (NFTs)." ;
+    ponto:hasNetType ponto:mainnet .
+
+ponto:Acala a ponto:Parachain ;
+    rdfs:label "Acala" ;
+    rdfs:comment "An all-in-one DeFi hub boasting a suite of applications for end-users, as well as a stablecoin (aUSD) and a smart contract platform for DeFi developers to build their projects on." ;
+    ponto:hasNetType ponto:mainnet .
+
+ponto:Moonbeam a ponto:Parachain ;
+    rdfs:label "Moonbeam" ;
+    rdfs:comment "A cross-chain connected smart contract platform that makes it easy to build multichain dapps on Polkadot using familiar Ethereum tools." ;
+    ponto:hasNetType ponto:mainnet .
+
+ponto:Astar a ponto:Parachain ;
+    rdfs:label "Astar" ;
+    rdfs:comment "A smart contract platform in the Polkadot ecosystem, supporting both Wasm and EVM" ;
+    ponto:hasNetType ponto:mainnet .
+
+ponto:Phala a ponto:Parachain ;
+    rdfs:label "Phala" ;
+    rdfs:comment "A next-generation decentralized cloud computing network built to power Web3 with security, scalability, and cost-effectiveness at the heart of its offering, designed to bring decentralized compute cloud to the masses." ;
+    ponto:hasNetType ponto:mainnet .
+
+# kusama
+ponto:Kusama a ponto:RelayChain ;
+    rdfs:label "Kusama" ;
+    rdfs:comment "The 'canary network' for Polkadot. It consists of an early-release, unaudited version of the Polkadot software. It is not a testnet - after the transition to NPoS, the network is entirely in the hands of the community (i.e., Kusama token holders)." ;
+    ponto:hasParachain ponto:Statemine ;
+    ponto:hasNetType ponto:mainnet .
+
+ponto:Statemine a ponto:Parachain ;
+    rdfs:label "Statemine" ;
+    rdfs:comment "A blockchain built using Substrate, the same technology used to build Polkadot." ;
+    ponto:hasNetType ponto:mainnet .
+
+# testnets
+ponto:Westmint a ponto:Blockchain ;
+    rdfs:label "Westmint" ;
+    rdfs:comment "A Polkadot test network used for experimentation and development." ;
+    ponto:hasNetType ponto:testnet ;
+    ponto:tests ponto:Polkadot .
+
+ponto:Westend a ponto:Blockchain ;
+    rdfs:label "Westend" ;
+    rdfs:comment "A Polkadot test network used for experimentation and development." ;
+    ponto:hasNetType ponto:testnet ;
+    ponto:tests ponto:Polkadot .
+
+ponto:Rococo a ponto:Blockchain ;
+    rdfs:label "Rococo" ;
+    rdfs:comment "A Polkadot test network used for experimentation and development." ;
+    ponto:hasNetType ponto:testnet ;
+    ponto:tests ponto:Polkadot .

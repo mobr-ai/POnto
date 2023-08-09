@@ -3,9 +3,6 @@ POnto is a Polkadot ontology designed to represent and relate the main entities 
 
 A draft version of it was initially based on Polkadot's [whitepaper](https://assets.polkadot.network/Polkadot-whitepaper.pdf). Afterwards, POnto was subsequently enriched according to discussions with domain experts and latest [documentation](https://wiki.polkadot.network/) available. As part of a conceptual framework, POnto was designed as a modular ontology organized hierarchically and provides a representation of different aspects and features of the Polkadot ecosystem. POnto is a structured representation of the ecosystem's fundamental components, concepts, and relationships.
 
-
-
-
 The ontology currently covers eleven modules, including the Core module, and others to represent specific aspects of the Polkadot ecosystem. These other modules are Consensus, Governance, Ledger, Network, Oracle, Stake, Token, Tooling, Transaction, and Wallet. POnto’s Core module defines classes to represent common entities that serve as a sort of upper ontology, supporting the other modules. It covers entities such as architecture components, protocols, wallets, modules, pallets, decentralized applications, etc. 
 
 The Consensus module focuses on the mechanisms and protocols used in the ecosystem to achieve agreement and validity of transactions across multiple chains. It includes concepts such as block production, finality, consensus algorithms, and block authorship. 
@@ -24,5 +21,24 @@ The other three modules (Ledger, Tooling, and Wallet) aim at representing key in
 
 ![POnto](https://github.com/mobr-ai/POnto/assets/779451/1bc8066a-2474-4818-992f-64cbad28da02)
 
+<br>
+
 # License
 All the ontology Turtle files and other code that may be created are licensed under Apache 2.0. All the available PDF documents are under [CC-SA license](https://creativecommons.org/licenses/by-sa/2.0/).
+
+<br>
+
+# Additional information
+
+POnto online [documentation](https://www.mobr.ai/ponto)
+
+Scientific [paper](https://arxiv.org/abs/2308.00735)
+
+<br>
+
+# Directory structure
+| Dir | Desc |
+| -------- | ------- |
+| src  | Turtle ontology files |
+| docs | POnto ontospy documentation. See docs/index.hml |
+| deliverables | Resources delivered during W3F research grant execution |

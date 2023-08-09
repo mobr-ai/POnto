@@ -1,0 +1,263 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# governance in the Polkadot Ecosystem
+ponto:Governance a owl:Class ;
+    rdfs:label "Governance" ;
+    rdfs:comment "The process of determining what changes to the network are permissible, such as modifications to code or movement of funds. The governance system in Polkadot is on-chain and revolves around stakeholder voting." ;
+    rdfs:subClassOf ponto:Component .
+
+
+# GovernanceV1
+ponto:GovernanceV1 a owl:Class ;
+    rdfs:label "Governance" ;
+    rdfs:comment "Former Polkadot's governance system, which ensured the appropriate usage of treasury funds and enabled timely upgrades and fixes." ;
+    rdfs:subClassOf ponto:Governance .
+
+ponto:Council a owl:Class ;
+    rdfs:label "Council" ;
+    rdfs:comment "An on-chain entity comprising several actors, each represented as an on-chain account, which was part of Polkadot's GovernanceV1." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:TechnicalCommittee a owl:Class ;
+    rdfs:label "Technical Committee" ;
+    rdfs:comment "A technocratic committee to manage upgrade timelines." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:hasGov1Component a owl:ObjectProperty ;
+    rdfs:domain ponto:GovernanceV1 ;
+    rdfs:range ponto:Council ;
+    rdfs:range ponto:TechnicalCommittee ;
+    rdfs:range ponto:AccountHolder ;
+    rdfs:range ponto:VoteDelegation .
+
+
+# OpenGov
+ponto:OpenGov a owl:Class ;
+    rdfs:label "OpenGov" ;
+    rdfs:comment "Previously known as Governance v2 (Gov2) during early development, Polkadot OpenGov serves as the current governance protocol for both Kusama and Polkadot." ;
+    rdfs:subClassOf ponto:Governance .
+
+ponto:Fellowship a owl:Class ;
+    rdfs:label "Fellowship" ;
+    rdfs:comment "A mostly self-governing expert body with a primary goal of representing humans who embody and contain the technical knowledge base of the Kusama and/or Polkadot networks and protocols." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Origin a owl:Class ;
+    rdfs:label "Origin" ;
+    rdfs:comment "The initiator of an extrinsic. A simple origin would be the account that is sending a token to another account. Polkadot also supports more complex origin types, such as the root origin, from which privileged functions can be called. In OpenGov, each origin has a fixed set of privileges. When making a proposal, it is important to choose the origin that has the privilege to execute the referenda." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Track a owl:Class ;
+    rdfs:label "Track" ;
+    rdfs:comment "Outlines the lifecycle for the proposal and is independent from other class's tracks. Having independent tracks allows the network to tailor the dynamics of referenda based upon their implied privilege level. Each track has its own dispatch origin and a preset configuration that governs the voting process and parameters." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:WhitelistPallet a owl:Class ;
+    rdfs:label "Whitelist Pallet" ;
+    rdfs:comment "Allows one Origin to escalate the privilege level of another Origin for a certain operation. In terms of OpenGov, it allows the Fellowship to authorise a new origin (which we will call Whitelisted-Root) to be executed with Root-level privileges." ;
+    rdfs:subClassOf ponto:Pallet .
+
+ponto:VotingPower a owl:Class ;
+    rdfs:label "Voting Power" ;
+    rdfs:comment "In the Polkadot multichain ecosystem, voting power is distributed among different entities based on their role and stake in the network." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:VoteDelegation a owl:Class ;
+    rdfs:label "Vote Delegation" ;
+    rdfs:comment "Ability to delegate voting power to another voter in the system. This works with conviction voting, allowing users to lock up tokens in order to increase the level of voting power their delegates wield on their behalf." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:MultiroleDelegation a owl:Class ;
+    rdfs:label "Multirole Delegation" ;
+    rdfs:comment "Allows users to specify a different delegate for every class of referendum in the system. If users do not want to delegate for a particular class of referendum then they can also retain direct control for that class." ;
+    rdfs:subClassOf ponto:VoteDelegation .
+
+ponto:hasVotingPower a owl:ObjectProperty ;
+    rdfs:domain ponto:AccountHolder ;
+    rdfs:domain ponto:Node ;
+    rdfs:range xsd:boolean .
+
+ponto:hasOpenGovComponent a owl:ObjectProperty ;
+    rdfs:domain ponto:OpenGov ;
+    rdfs:range ponto:Fellowship ;
+    rdfs:range ponto:WhitelistPallet ;
+    rdfs:range ponto:MultiroleDelegation ;
+    rdfs:range ponto:Origin ;
+    rdfs:range ponto:Track .
+
+ponto:trackId a xsd:integer ;
+    rdfs:label "Track Id" .
+
+ponto:submissionDeposit a xsd:decimal ;
+    rdfs:label "Submission Deposit" ;
+    rdfs:comment "The minimum amount to be used as a (refundable) deposit to submit a public referendum proposal." .
+
+ponto:decisionDeposit a xsd:decimal ;
+    rdfs:label "Decision Deposit" ;
+    rdfs:comment "This deposit is required for a referendum to progress to the decision phase after the end of prepare period." .
+
+ponto:preparePeriod a xsd:integer ;
+    rdfs:label "Prepare Period" ;
+    rdfs:comment "The minimum time the referendum needs to wait before it can progress to the next phase after submission. Voting is enabled, but the votes do not count toward the outcome of the referendum yet." .
+
+ponto:decisionPeriod a xsd:integer ;
+    rdfs:label "Decision Period" ;
+    rdfs:comment "Amount of time a decision may take to be approved to move to the confirming period. If the proposal is not approved by the end of the decision period, it gets rejected." .
+
+ponto:confirmationPeriod a xsd:integer ;
+    rdfs:label "Confirmation Period" ;
+    rdfs:comment "The total time the referenda must meet both the min approval and support criteria during the decision period in order to pass and enter the enactment period." .
+
+ponto:minEnactmentPeriod a xsd:integer ;
+    rdfs:label "Min Enactment Period" ;
+    rdfs:comment "Minimum time that an approved proposal must be in the dispatch queue after approval. The proposer has the option to set the enactment period to be of any value greater than the min enactment period." .
+
+ponto:maxDeciding a xsd:integer ;
+    rdfs:label "Max Deciding" ;
+    rdfs:comment "The maximum number of referenda that can be in the decision period of a track all at once." .
+
+ponto:conviction a xsd:decimal ;
+    rdfs:label "Conviction" ;
+    rdfs:comment "A multiplier to increase voting power." .
+
+ponto:approval a xsd:decimal ;
+    rdfs:label "Approval" ;
+    rdfs:comment "The share of the approval vote-weight after adjustments for conviction against the total number of vote-weight for both approval and rejection." .
+
+ponto:minApproval a xsd:decimal ;
+    rdfs:label "Min Approval" ;
+    rdfs:comment "The threshold of approval (along with the min support) needed for a proposal to meet the requirements of the confirm period." .
+
+ponto:support a xsd:integer ;
+    rdfs:label "Support" ;
+    rdfs:comment "The total number of votes in approval (ignoring adjustments for conviction) compared to the total possible amount of votes that could be made in the system. Support also takes into account abstained votes." .
+
+ponto:minSupport a xsd:integer ;
+    rdfs:label "Min Support" ;
+    rdfs:comment "The threshold of support (along with the min approval) needed for a proposal to meet the requirements of the confirm period." .
+
+ponto:hasTrackId a rdf:Property ;
+    rdfs:domain ponto:Track ;
+    rdfs:range xsd:integer .
+
+ponto:hasTrackId rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:trackId
+] .
+
+ponto:hasTrackOrigin a owl:ObjectProperty ;
+    rdfs:domain ponto:Track ;
+    rdfs:range ponto:Origin .
+
+ponto:hasMaxDeciding a rdf:Property ;
+    rdfs:domain ponto:Track ;
+    rdfs:range xsd:integer .
+
+ponto:hasMaxDeciding rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:maxDeciding
+] .
+
+ponto:hasPreparePeriod a rdf:Property ;
+    rdfs:domain ponto:Track ;
+    rdfs:range owl:integer .
+
+ponto:hasPreparePeriod rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:preparePeriod
+] .
+
+ponto:hasDecisionDeposit a rdf:Property ;
+    rdfs:domain ponto:Track ;
+    rdfs:range xsd:decimal .
+
+ponto:hasDecisionDeposit rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:decisionDeposit
+] .
+
+ponto:hasConfirmPeriod a rdf:Property ;
+    rdfs:domain ponto:Track ;
+    rdfs:range xsd:integer .
+
+ponto:hasConfirmPeriod rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:confirmationPeriod
+] .
+
+# Governance entities
+ponto:Proposal a owl:Class ;
+    rdfs:label "Proposal" ;
+    rdfs:comment "A potential function call to be voted on in a referendum. Proposals modify the behavior of the Polkadot network, from minor parameter tuning up to replacing the runtime code." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Bounty a owl:Class ;
+    rdfs:label "Bounty" ;
+    rdfs:comment "A mechanism which works in some sense as the reverse of a Treasury Proposal, allowing the Polkadot Council to indicate that there is a need to do some task for the Polkadot network and allowing users to receive DOT in return for working on that task." ;
+    rdfs:subClassOf ponto:GovernanceComponent .
+
+ponto:Curator a owl:Class ;
+    rdfs:label "Curator" ;
+    rdfs:comment "A person, group, or other entity charged with judging and verifying the successful completion of a Bounty." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:Referendum a owl:Class ;
+    rdfs:label "Referendum" ;
+    rdfs:comment "A vote on whether or not a proposal should be accepted by the network. Referenda may be initiated by the Governance Council (gov1) or by the public (OpenGov), by a member of the public, or as the result of a previous proposal. Stakeholders vote on referenda, weighted by both the size of their stake (i.e. number of DOT held) and the amount of time they are willing to lock their tokens." ;
+    rdfs:subClassOf owl:Thing .
+
+ponto:leadin a xsd:string ;
+    rdfs:label "Lead-in" .
+
+ponto:deciding a xsd:string ;
+    rdfs:label "Deciding" .
+
+ponto:confirmation a xsd:string ;
+    rdfs:label "Confirmation" .
+
+ponto:enactment a xsd:string ;
+    rdfs:label "Enactment" .
+
+ponto:currentReferendumPeriod a rdf:Property ;
+    rdfs:domain ponto:Referendum ;
+    rdfs:range xsd:string .
+
+ponto:currentReferendumPeriod rdfs:subPropertyOf [
+        rdf:type owl:FunctionalProperty ;
+        owl:inverseOf owl:hasValue ;
+        owl:hasValue ponto:leadin, ponto:deciding, ponto:confirmation, ponto:enactment
+] .
+
+ponto:Motion a owl:Class ;
+    rdfs:label "Motion" ;
+    rdfs:comment "A motion is essentially a 'referendum' or 'decision' being considered by the Council. The Council can vote on motions like approving Treasury Proposals or making proposals for the community to vote on." ;
+    rdfs:subClassOf ponto:Referendum .
+
+#properties and relationships
+ponto:initiateProposal a owl:ObjectProperty ;
+    rdfs:domain ponto:StakeHolder ;
+    rdfs:range ponto:Proposal .
+
+ponto:voting a owl:ObjectProperty ;
+    rdfs:label "Voting" ;
+    rdfs:comment "The process of stake holders determining whether or not a referendum should pass. Votes are weighted both by the number of DOT that the stakeholder account controls and the amount of time they are willing to lock their DOT." ;
+    rdfs:domain ponto:StakeHolder ;
+    rdfs:range ponto:Referendum .
+
+ponto:tabling a owl:ObjectProperty ;
+    rdfs:label "Tabling" ;
+    rdfs:comment "In Polkadot governance, bringing a proposal to a vote via referendum. Note that this is the British meaning of 'tabling', which is different from the US version, which means 'to postpone' a measure." ;
+    rdfs:domain ponto:Proposal ;
+    rdfs:range ponto:Referendum .
+
+ponto:verifyingBounty a owl:ObjectProperty ;
+    rdfs:domain ponto:Curator ;
+    rdfs:range ponto:Bounty .

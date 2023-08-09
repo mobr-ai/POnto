@@ -1,0 +1,43 @@
+@prefix ponto: <http://www.mobr.ai/ontologies/ponto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# staking in the Polkadot Ecosystem
+
+ponto:Stake a owl:Class ;
+    rdfs:label "Stake" ;
+    rdfs:comment "A measure of the amount of tokens held by an account, used to determine the account's influence in the consensus and governance mechanisms." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:StakeHolder a owl:Class ;
+    rdfs:label "Stake Holder" ;
+    rdfs:comment "An account holder who holds a stake in a blockchain ecosystem and participates in the consensus and governance mechanisms." ;
+    rdfs:subClassOf ponto:AccountHolder .
+
+ponto:StakePool a owl:Class ;
+    rdfs:label "Stake Pool" ;
+    rdfs:comment "A group of stakeholders who combine their stakes to increase their chances of being selected as validators." ;
+    rdfs:subClassOf ponto:Component .
+
+
+# Relationships
+
+ponto:hasStake a owl:ObjectProperty ;
+    rdfs:domain ponto:StakeHolder ;
+    rdfs:range ponto:Stake ;
+    rdfs:comment "A StakeHolder that holds a certain amount of stake in the Polkadot network." .
+
+# A Stake Holder can belong to multiple Stake Pools
+ponto:belongsToPool a owl:ObjectProperty ;
+    rdfs:comment "Relates a stake holder to the stake pool they belong to." ;
+    rdf:type owl:ObjectProperty ;
+    rdfs:domain ponto:StakeHolder ;
+    rdfs:range ponto:StakePool .
+
+# A Stake Pool can have multiple Stake Holders
+ponto:hasStakeHolder a owl:ObjectProperty ;
+    rdfs:comment "Relates a stake pool to the stake holders that belong to it." ;
+    rdf:type owl:ObjectProperty ;
+    rdfs:domain ponto:StakePool ;
+    rdfs:range ponto:StakeHolder .
