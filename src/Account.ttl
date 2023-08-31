@@ -2,24 +2,25 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-# Tokens and related subjects like account in the Polkadot Ecosystem
+# Assets and related subjects like account in the Polkadot Ecosystem
 
-# tokens
-ponto:Token a owl:Class ;
-    rdfs:label "Token" ;
-    rdfs:comment "A unit of value that is used to represent assets on a distributed ledger." ;
+# assets
+ponto:Asset a owl:Class ;
+    rdfs:label "Asset" ;
+    rdfs:comment "Representation of an asset on a distributed ledger." ;
     rdfs:subClassOf ponto:Component .
 
 ponto:FungibleToken a owl:Class ;
     rdfs:label "Fungible Token" ;
-    rdfs:comment "Divisible interchengable and non-unique token" ;
-    rdfs:subClassOf ponto:Token .
+    rdfs:comment "Divisible interchengable and non-unique unit of value that is used to represent assets on a distributed ledger." ;
+    rdfs:subClassOf ponto:Asset .
 
 ponto:NFT a owl:Class ;
     rdfs:label "Non-fungible Token" ;
     rdfs:comment "A non-fungible token is a token that does not hold the property of fungibility, which, in turn, means that it cannot be interchangeable and indistinguishable from other tokens. NFTs allow the tokenization of unique items and provide exclusive ownership for those tokens." ;
-    rdfs:subClassOf ponto:Component .
+    rdfs:subClassOf ponto:Asset .
 
 ponto:NativeToken a owl:Class ;
     rdfs:label "Native Token" ;
@@ -88,10 +89,106 @@ ponto:Teleport a owl:Class ;
     rdfs:comment "Send an asset from an account on one chain to an account on a different chain. This occurs by burning an amount on the sending chain and minting an equivalent amount on the destination chain." ;
     rdfs:subClassOf owl:Thing .
 
+ponto:ReferenceCounter a owl:Class ;
+    rdfs:label "RefCounter" ;
+    rdfs:comment "Reference counters indicate the current state of an account. There are three types of reference counter: Sufficients, Consumers, and Providers." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:Sufficients a owl:Class ;
+    rdfs:label "Sufficients" ;
+    rdfs:comment "A reference counter to indicate if an account is self-sufficient and can exist by itself." ;
+    rdfs:subClassOf ponto:ReferenceCounter .
+
+ponto:Consumers a owl:Class ;
+    rdfs:label "Consumers" ;
+    rdfs:comment "A reference counter to indicate the number of other modules that currently depend on this account's existence. The account cannot be reaped until this is zero." ;
+    rdfs:subClassOf ponto:ReferenceCounter .
+
+ponto:Providers a owl:Class ;
+    rdfs:label "Providers" ;
+    rdfs:comment "A reference counter to indicate the number of other modules that allow this account to exist. The account may not be reaped until this (providers) and `sufficients` are both zero." ;
+    rdfs:subClassOf ponto:ReferenceCounter .
+
+ponto:LockType a owl:Class ;
+    rdfs:label "Lock Type" ;
+    rdfs:comment "Tokens may be locked. There are four types of lock: Staking, Democracy, Election, and Vesting." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:StakingLockType a owl:Class ;
+    rdfs:label "Staking Lock Type" ;
+    rdfs:comment "Probably the most common lock type. It applies when tokens are staked to nominate or validate. They can be bonded or unbonding." ;
+    rdfs:subClassOf ponto:LockType .
+
+ponto:DemocracyLockType a owl:Class ;
+    rdfs:label "Democracy Lock Type" ;
+    rdfs:comment "A lock type that applies when participating in democracy, usually through voting in referenda, either directly or through a delegation. See this page for more information on democracy locks." ;
+    rdfs:subClassOf ponto:LockType .
+
+ponto:ElectionLockType a owl:Class ;
+    rdfs:label "Election Lock Type" ;
+    rdfs:comment "A lock type that applies when voting for Council members." ;
+    rdfs:subClassOf ponto:LockType .
+
+ponto:VestingLockType a owl:Class ;
+    rdfs:label "Vesting Lock Type" ;
+    rdfs:comment "A lock type that can be applied by the sender of tokens through a 'vested transfer'. These tokens are received locked, and unlock over a period of time, usually in small increments. Vesting tokens unlock based on a vesting schedule and are considered lazy payouts, but they can be used for any other action that introduces a lock." ;
+    rdfs:subClassOf ponto:LockType .
+
+# literals
+ponto:Balance a owl:Class ;
+    rdfs:label "Balance" ;
+    rdfs:comment "Token balance controlled by an account holder" .
+    rdfs:subClassOf ponto:Component .
+
+ponto:ReservedBalance a owl:Class ;
+    rdfs:label "Reserved Balance" ;
+    rdfs:comment "Certain actions require reserving transferable tokens to use space in the chain state. These tokens act as a deposit that is set aside for an operation and still belongs to the account holder but cannot be used for other operations. The tokens are reserved for as long as the reason exists. Once the reason is removed, the balance becomes transferable once again." ;
+    rdfs:subClassOf ponto:Balance .
+
+ponto:ReservationReason a owl:Class ;
+    rdfs:label "Reservation Reason" ;
+    rdfs:comment "Certain actions require reserving transferable tokens to use space in the chain state. These tokens act as a deposit that is set aside for an operation and still belongs to the account holder but cannot be used for other operations. The tokens are reserved for as long as the reason exists. Once the reason is removed, the balance becomes transferable once again." ;
+    rdfs:subClassOf ponto:Component .
+
+ponto:LockedBalance a owl:Class ;
+    rdfs:label "Locked Balance" ;
+    rdfs:comment "When tokens are used to serve their utility purpose on the chain, they are locked. The account holder still controls locked tokens. They cannot be transferred, but they can be used for multiple operations at the same time. For example, the same locked tokens can be used to nominate validators and vote in democracy." ;
+    rdfs:subClassOf ponto:Balance .
+
+ponto:TransferableBalance a owl:Class ;
+    rdfs:label "Transferable Balance" ;
+    rdfs:comment "Transferable tokens are fully available. These tokens are the ones that can be transferred, used to pay transaction fees, and become locked or reserved for other purposes. " ;
+    rdfs:subClassOf ponto:Balance .
+
 # relationships
+ponto:hasLockType a owl:ObjectProperty ;
+        rdfs:domain ponto:LockedBalance ;
+        rdfs:range ponto:LockType .
+
+ponto:hasAddress a owl:DatatypeProperty ;
+    rdfs:comment "An account has an address." ;
+    rdfs:domain ponto:Account ;
+    rdfs:range xsd:string .
+
+ponto:hasRefCountValue a owl:DatatypeProperty ;
+    rdfs:domain ponto:RefCounter ;
+    rdfs:range xsd:integer .
+
+ponto:hasSufficients a owl:ObjectProperty ;
+    rdfs:domain ponto:Account ;
+    rdfs:range ponto:Sufficients .
+
+ponto:hasConsumers a owl:ObjectProperty ;
+    rdfs:domain ponto:Account ;
+    rdfs:range ponto:Consumers .
+
+ponto:hasProviders a owl:ObjectProperty ;
+    rdfs:domain ponto:Account ;
+    rdfs:range ponto:Providers .
+
 ponto:bonding a rdf:Property ;
     rdfs:comment "A process by which tokens can be 'frozen' in exchange for some other benefit. For example, staking is a form of bonding for which you receive rewards in exchange for securing the network. You can also bond tokens in exchange for a parachain slot." ;
-    rdfs:domain ponto:Token ;
+    rdfs:domain ponto:Asset ;
     rdfs:range xsd:decimal .
 
 # a wallet has one or more accounts
@@ -109,12 +206,45 @@ ponto:accountCreated a owl:DatatypeProperty ;
 # an account has one or more types of tokens
 ponto:hasToken a owl:ObjectProperty ;
     rdfs:domain ponto:Account ;
-    rdfs:range ponto:Token .
+    rdfs:range ponto:Asset .
 
-# ballance of a token in an account of a wallet
-ponto:hasBalance a rdf:Property ;
-    rdfs:domain ponto:Token ;
+# balance of a token
+ponto:hasBalanceValue a owl:DatatypeProperty ;
+    rdfs:domain ponto:Balance ;
     rdfs:range xsd:decimal .
+
+ponto:hasTransferableBalance a owl:ObjectProperty ;
+    rdfs:domain ponto:FungibleToken ;
+    rdfs:range ponto:TransferableBalance .
+
+ponto:hasReservedBalance a owl:ObjectProperty ;
+    rdfs:domain ponto:FungibleToken ;
+    rdfs:range ponto:ReservedBalance .
+
+ponto:reservedFor a owl:ObjectProperty ;
+    rdfs:comment "Tokens can be reserved for various reasons that use space in the chain state. Unlike locks, reserves do stack. So, each new action that requires a deposit reserves the necessary amount added to any previous reserves that might exist." ;
+    rdfs:domain ponto:ReservedBalance ;
+    rdfs:range ponto:ReservationReason .
+
+ponto:hasReasonDescription a owl:DatatypeProperty ;
+    rdfs:domain ponto:ReservationReason ;
+    rdfs:range xsd:string .
+
+ponto:makesReservation a owl:ObjectProperty ;
+    rdfs:domain ponto:LedgerRecord ;
+    rdfs:range ponto:ReservedBalance .
+
+ponto:hasLockedBalance a owl:ObjectProperty ;
+    rdfs:domain ponto:FungibleToken ;
+    rdfs:range ponto:LockedBalance .
+
+ponto:hasSymbol a owl:DatatypeProperty ;
+    rdfs:domain ponto:FungibleToken ;
+    rdfs:range xsd:string .
+
+ponto:hasName a owl:DatatypeProperty ;
+    rdfs:domain ponto:FungibleToken ;
+    rdfs:range xsd:string .
 
 # native tokens
 ponto:DOT a owl:Class ;
@@ -124,5 +254,5 @@ ponto:DOT a owl:Class ;
 
 ponto:KSM a owl:Class ;
     rdfs:label "KSM" ;
-    rdfs:comment "The abbreviation for Kusama network tokens" ;
+    rdfs:comment "The native token for the Kusama network" ;
     rdfs:subClassOf ponto:NativeToken .

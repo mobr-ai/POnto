@@ -2,6 +2,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # transactions in the Polkadot Ecosystem
 
@@ -22,23 +23,81 @@ ponto:Inherent a owl:Class ;
 
 ponto:Transaction a owl:Class ;
     rdfs:label "Transaction" ;
-    rdfs:comment "A transaction in the Polkadot blockchain, representing the transfer of assets between two parties." ;
+    rdfs:comment "A transaction in a blockchain, representing the transfer of assets between two parties." ;
     rdfs:subClassOf ponto:Extrinsic .
+
+ponto:Transfer a owl:Class ;
+    rdfs:label "Transfer" ;
+    rdfs:comment "Send an asset from one account to another. This generally refers to transfers that occur only on the same chain." ;
+    rdfs:subClassOf ponto:LedgerRecord .
+
+ponto:XCMTransfer a owl:Class ;
+    rdfs:label "XCM Transfer" ;
+    rdfs:comment "Refers to transfers that occur between different chains." ;
+    rdfs:subClassOf ponto:Transfer .
 
 ponto:Sender a owl:Class ;
     rdfs:label "Sender" ;
-    rdfs:comment "The entity sending assets in a Polkadot blockchain transaction." ;
+    rdfs:comment "The entity sending assets in a blockchain transaction." ;
     rdfs:subClassOf ponto:Account .
 
-ponto:Recipient a owl:Class ;
-    rdfs:label "Recipient" ;
-    rdfs:comment "The entity receiving assets in a Polkadot blockchain transaction." ;
+ponto:Beneficiary a owl:Class ;
+    rdfs:label "Beneficiary" ;
+    rdfs:comment "The recipient of the value of a transfer or of a referendum" ;
     rdfs:subClassOf ponto:Account .
 
 # properties
+ponto:incrementsRefCount a owl:ObjectProperty ;
+    rdfs:domain ponto:LedgerRecord ;
+    rdfs:comment "A Transaction or an Account can increment a Reference Counter" ;
+    rdfs:range ponto:ReferenceCounter .
+
+ponto:hasTransferBeneficiary a owl:ObjectProperty ;
+    rdfs:domain ponto:Transfer ;
+    rdfs:range ponto:Beneficiary .
+
+ponto:hasExtrinsicId a owl:DatatypeProperty ;
+    rdfs:domain ponto:Extrinsic ;
+    rdfs:range xsd:string .
+
+ponto:hasXCMTransfer a owl:ObjectProperty ;
+    rdfs:domain ponto:Extrinsic ;
+    rdfs:range ponto:XCMTransfer .
+
+ponto:hasTransferAsset a owl:ObjectProperty ;
+    rdfs:domain ponto:XCMTransfer ;
+    rdfs:range ponto:Asset .
+
+ponto:hasTransferAmountSent a owl:DatatypeProperty ;
+    rdfs:domain ponto:XCMTransfer ;
+    rdfs:range xsd:decimal .
+
+ponto:hasTransferAmountSentUSD a owl:DatatypeProperty ;
+    rdfs:domain ponto:XCMTransfer ;
+    rdfs:range xsd:decimal .
+
+ponto:hasTransferAmountReceived a owl:DatatypeProperty ;
+    rdfs:domain ponto:XCMTransfer ;
+    rdfs:range xsd:decimal .
+
+ponto:hasTransferAmountReceivedUSD a owl:DatatypeProperty ;
+    rdfs:domain ponto:XCMTransfer ;
+    rdfs:range xsd:decimal .
+
+ponto:recordedOn a owl:ObjectProperty ;
+    owl:inverseOf ponto:hasRecord ;
+    rdfs:comment "The block where a record is stored" ;
+    rdfs:domain ponto:LedgerRecord ;
+    rdfs:range ponto:Block .
+
 ponto:amountTransferred a owl:DatatypeProperty ;
     rdfs:comment "The amount of assets transferred in a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
+    rdfs:range xsd:decimal .
+
+ponto:amountXCMTransferred a owl:DatatypeProperty ;
+    rdfs:comment "The amount of assets transferred in a XCM transaction." ;
+    rdfs:domain ponto:XCMTransaction ;
     rdfs:range xsd:decimal .
 
 ponto:typeOfAsset a owl:DatatypeProperty ;
@@ -46,22 +105,33 @@ ponto:typeOfAsset a owl:DatatypeProperty ;
     rdfs:domain ponto:Transaction ;
     rdfs:range xsd:string .
 
-ponto:timestamp a owl:DatatypeProperty ;
+ponto:hasTimestamp a owl:DatatypeProperty ;
     rdfs:comment "The timestamp of the transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range xsd:dateTimeStamp .
 
-ponto:uniqueID a owl:DatatypeProperty ;
-    rdfs:comment "The unique identification number of a record in the Polkadot blockchain." ;
-    rdfs:domain ponto:LedgerRecord ;
+ponto:hasOriginationTimestamp a owl:DatatypeProperty ;
+    rdfs:comment "The timestamp in the origination of the XCM transfer." ;
+    rdfs:domain ponto:XCMTransfer ;
+    rdfs:range xsd:dateTimeStamp .
+
+ponto:hasOriginationSection rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:PalletSection .
+
+ponto:hasOriginationMethod rdfs:domain ponto:Transaction ;
+    rdfs:range ponto:PalletMethod .
+
+ponto:hasDestinationTimestamp a owl:DatatypeProperty ;
+    rdfs:comment "The timestamp in the destination of the XCM transfer." ;
+    rdfs:domain ponto:XCMTransfer ;
+    rdfs:range xsd:dateTimeStamp .
+
+ponto:hasDestinationExecutionStatus a owl:DatatypeProperty ;
+    rdfs:comment "The status of the XCM transfer execution in the destination." ;
+    rdfs:domain ponto:XCMTransfer ;
     rdfs:range xsd:string .
 
 ponto:hasSender a owl:ObjectProperty ;
     rdfs:comment "The sender of a Polkadot blockchain transaction." ;
     rdfs:domain ponto:Transaction ;
     rdfs:range ponto:Sender .
-
-ponto:hasRecipient a owl:ObjectProperty ;
-    rdfs:comment "The recipient of a Polkadot blockchain transaction." ;
-    rdfs:domain ponto:Transaction ;
-    rdfs:range ponto:Recipient .

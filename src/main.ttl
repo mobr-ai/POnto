@@ -19,7 +19,7 @@
 	vann:preferredNamespacePrefix "ponto" ;
 	rdfs:comment "This Polkadot ontology specification uses W3C RDF Schema and the Web Ontology Language. Its main source of information comes from discussions with the Polkadot community and official documentation."@en ;
 	rdfs:seeAlso <https://github.com/mobr-ai/POnto> , <https://wiki.polkadot.network/> ;
-	owl:versionInfo "0.0.1" ;
+	owl:versionInfo "0.0.2" ;
 	ns:term_status "unstable" ;
     dc:license <https://www.apache.org/licenses/LICENSE-2.0> .
 
@@ -179,11 +179,7 @@ ponto:MobileWallet a owl:Class ;
     rdfs:comment "A wallet that runs on a mobile device and can be used to make payments on the go." ;
     rdfs:subClassOf ponto:Wallet .
 
-#relationships
-ponto:hasWallet rdfs:domain ponto:AccountHolder ;
-    rdfs:range ponto:Wallet .
-
-# person or organization
+# person, organization or modules
 ponto:AccountHolder a owl:Class ;
     rdfs:label "Account Holder" ;
     rdfs:comment "An entity that holds one or more accounts, such as an individual or organization." ;
@@ -204,6 +200,16 @@ ponto:Pallet a owl:Class ;
     rdfs:comment "Substrate Runtime Module. That is, a set of compoments and support libraries that can be used, modified and extended to build the runtime logic to suit the needs of blockchains." ;
     rdfs:subClassOf ponto:RuntimeModule .
 
+ponto:PalletSection a owl:Class ;
+    rdfs:label "Pallet Section" ;
+    rdfs:comment "Information about each of the pallets in the runtime" ;
+    rdfs:subClassOf ponto:Metadata .
+
+ponto:PalletMethod a owl:Class ;
+    rdfs:label "Pallet Method" ;
+    rdfs:comment "A method of a pallet." ;
+    rdfs:subClassOf ponto:Pallet .
+
 ponto:Substrate a owl:Class ;
     rdfs:label "Substrate" ;
     rdfs:comment "A modular framework for building blockchains. Polkadot is built using Substrate. Chains built with Substrate will be easy to connect as parachains." ;
@@ -223,3 +229,10 @@ ponto:FRAME a owl:Class ;
     rdfs:label "FRAME" ;
     rdfs:comment "The collection of Substrate-provided pallets" ;
     ponto:subClassOf ponto:Substrate .
+
+#relationships
+ponto:hasWallet rdfs:domain ponto:AccountHolder ;
+    rdfs:range ponto:Wallet .
+
+ponto:dependsOn rdfs:domain ponto:Module ;
+    rdfs:range ponto:ReferenceCounter .

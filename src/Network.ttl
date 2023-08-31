@@ -2,6 +2,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 ponto:RelayChain a owl:Class ;
     rdfs:label "Relay Chain" ;
@@ -53,9 +54,13 @@ ponto:ParachainRegistry a owl:Class ;
     rdfs:comment "A relatively simple database-like construct that holds both static and dynamic information on each chain." ;
     rdfs:subClassOf owl:Thing .
 
-ponto:paraId a xsd:string ;
-    rdfs:label "ParaId" ;
+ponto:paraId a xsd:integer ;
+    rdfs:label "Parachain Id" ;
     rdfs:comment "A unique numeric (non-negative integer) identifier for a parachain." .
+
+ponto:paraName a xsd:string ;
+    rdfs:label "Parachain Name" ;
+    rdfs:comment "Name of the parachain." .
 
 ponto:hasNetType a rdf:Property ;
         rdfs:domain ponto:DistributedLedger ;
@@ -197,13 +202,9 @@ ponto:runsOn a owl:ObjectProperty ;
     rdfs:domain ponto:Collator ;
     rdfs:range ponto:Parachain .
 
-# a record is registered on a block
-ponto:registeredOn a owl:ObjectProperty ;
-    rdfs:domain ponto:LedgerRecord ;
-    rdfs:range ponto:Block .
-
 # a block composes a blockchain
 ponto:composes a owl:ObjectProperty ;
+    owl:inverseOf ponto:composedBy ;
     rdfs:domain ponto:Block ;
     rdfs:range ponto:Blockchain .
 
@@ -224,15 +225,14 @@ ponto:hasLease rdfs:domain ponto:Parachain ;
     rdfs:range ponto:LeasePeriod .
 
 # A parachain has an identifier
-ponto:hasParaId a rdf:Property ;
+ponto:hasParaId a owl:DatatypeProperty ;
         rdfs:domain ponto:Parachain ;
-        rdfs:range xsd:integer .
+        rdfs:range ponto:paraId .
 
-ponto:hasParaId rdfs:subPropertyOf [
-        rdf:type owl:FunctionalProperty ;
-        owl:inverseOf owl:hasValue ;
-        owl:hasValue ponto:paraId
-] .
+# A parachain has a name
+ponto:hasParaName a owl:DatatypeProperty ;
+        rdfs:domain ponto:Parachain ;
+        rdfs:range ponto:paraName .
 
 # bridge
 ponto:bridgeRelayChain a owl:ObjectProperty ;
