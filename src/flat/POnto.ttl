@@ -526,7 +526,7 @@ ponto:VestingLockType a owl:Class ;
 # literals
 ponto:Balance a owl:Class ;
     rdfs:label "Balance" ;
-    rdfs:comment "Token balance controlled by an account holder" ;
+    rdfs:comment "Token balance available in an account" ;
     rdfs:subClassOf ponto:Component .
 ponto:ReservedBalance a owl:Class ;
     rdfs:label "Reserved Balance" ;
@@ -598,7 +598,7 @@ ponto:reservedFor a owl:ObjectProperty ;
 ponto:hasReasonDescription a owl:DatatypeProperty ;
     rdfs:domain ponto:ReservationReason ;
     rdfs:range xsd:string .
-ponto:makesReservation a owl:ObjectProperty ;
+ponto:hasReserved a owl:ObjectProperty ;
     rdfs:domain ponto:LedgerRecord ;
     rdfs:range ponto:ReservedBalance .
 ponto:hasLockedBalance a owl:ObjectProperty ;
@@ -676,6 +676,10 @@ ponto:Beneficiary a owl:Class ;
 ponto:incrementsRefCount a owl:ObjectProperty ;
     rdfs:domain ponto:LedgerRecord ;
     rdfs:comment "A Transaction or an Account can increment a Reference Counter" ;
+    rdfs:range ponto:ReferenceCounter .
+ponto:decrementsRefCount a owl:ObjectProperty ;
+    rdfs:domain ponto:LedgerRecord ;
+    rdfs:comment "A Transaction or an Account can decrement a Reference Counter" ;
     rdfs:range ponto:ReferenceCounter .
 ponto:hasTransferBeneficiary a owl:ObjectProperty ;
     rdfs:domain ponto:Transfer ;
