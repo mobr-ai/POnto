@@ -230,7 +230,7 @@ ponto:hasReasonDescription a owl:DatatypeProperty ;
     rdfs:domain ponto:ReservationReason ;
     rdfs:range xsd:string .
 
-ponto:makesReservation a owl:ObjectProperty ;
+ponto:hasReserved a owl:ObjectProperty ;
     rdfs:domain ponto:LedgerRecord ;
     rdfs:range ponto:ReservedBalance .
 

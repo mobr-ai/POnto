@@ -52,6 +52,11 @@ ponto:incrementsRefCount a owl:ObjectProperty ;
     rdfs:comment "A Transaction or an Account can increment a Reference Counter" ;
     rdfs:range ponto:ReferenceCounter .
 
+ponto:decrementsRefCount a owl:ObjectProperty ;
+    rdfs:domain ponto:LedgerRecord ;
+    rdfs:comment "A Transaction or an Account can decrement a Reference Counter" ;
+    rdfs:range ponto:ReferenceCounter .
+
 ponto:hasTransferBeneficiary a owl:ObjectProperty ;
     rdfs:domain ponto:Transfer ;
     rdfs:range ponto:Beneficiary .
