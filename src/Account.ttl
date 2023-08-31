@@ -137,7 +137,7 @@ ponto:VestingLockType a owl:Class ;
 # literals
 ponto:Balance a owl:Class ;
     rdfs:label "Balance" ;
-    rdfs:comment "Token balance controlled by an account holder" .
+    rdfs:comment "Token balance available in an account" ;
     rdfs:subClassOf ponto:Component .
 
 ponto:ReservedBalance a owl:Class ;
