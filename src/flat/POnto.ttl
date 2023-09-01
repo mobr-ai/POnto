@@ -1002,7 +1002,8 @@ ponto:Polkadot a ponto:RelayChain ;
     ponto:hasParachain ponto:Phala .
 ponto:Collectives a ponto:Parachain ;
     rdfs:label "Collectives" ;
-    rdfs:comment "The Polkadot Collectives parachain was added in Referendum 81 and exists only on Polkadot (i.e., there is no Kusama equivalent). The Collectives chain hosts on-chain collectives that serve the Polkadot network, such as the Fellowship and Polkadot Alliance." .
+    rdfs:comment "The Polkadot Collectives parachain was added in Referendum 81 and exists only on Polkadot (i.e., there is no Kusama equivalent). The Collectives chain hosts on-chain collectives that serve the Polkadot network, such as the Fellowship and Polkadot Alliance." ;
+    ponto:hasParaId 1001 .
 ponto:PolkadotAlliance a ponto:Collective ;
     rdfs:label "Polkadot Alliance" ;
     rdfs:comment "The Polkadot Alliance is an on-chain collective founded by Acala, Astar, Interlay, Kilt, Moonbeam, Phala, and Subscan, to establish standards and ethics for open-source development in referendum #94. It aims to support development standards and expose bad actors within the ecosystems of Polkadot." .
@@ -1013,29 +1014,44 @@ ponto:Statemint a ponto:Parachain ;
 ponto:Acala a ponto:Parachain ;
     rdfs:label "Acala" ;
     rdfs:comment "An all-in-one DeFi hub boasting a suite of applications for end-users, as well as a stablecoin (aUSD) and a smart contract platform for DeFi developers to build their projects on." ;
-    ponto:hasNetType ponto:mainnet .
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParaId 2000 .
 ponto:Moonbeam a ponto:Parachain ;
     rdfs:label "Moonbeam" ;
     rdfs:comment "A cross-chain connected smart contract platform that makes it easy to build multichain dapps on Polkadot using familiar Ethereum tools." ;
-    ponto:hasNetType ponto:mainnet .
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParaId 2004 .
 ponto:Astar a ponto:Parachain ;
     rdfs:label "Astar" ;
     rdfs:comment "A smart contract platform in the Polkadot ecosystem, supporting both Wasm and EVM" ;
-    ponto:hasNetType ponto:mainnet .
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParaId 2006 .
 ponto:Phala a ponto:Parachain ;
     rdfs:label "Phala" ;
     rdfs:comment "A next-generation decentralized cloud computing network built to power Web3 with security, scalability, and cost-effectiveness at the heart of its offering, designed to bring decentralized compute cloud to the masses." ;
-    ponto:hasNetType ponto:mainnet .
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParaId 2035 .
 # kusama
 ponto:Kusama a ponto:RelayChain ;
     rdfs:label "Kusama" ;
     rdfs:comment "The 'canary network' for Polkadot. It consists of an early-release, unaudited version of the Polkadot software. It is not a testnet - after the transition to NPoS, the network is entirely in the hands of the community (i.e., Kusama token holders)." ;
     ponto:hasParachain ponto:Statemine ;
     ponto:hasNetType ponto:mainnet .
-ponto:Statemine a ponto:Parachain ;
-    rdfs:label "Statemine" ;
+ponto:Moonriver a ponto:Parachain ;
+    rdfs:label "Moonriver" ;
     rdfs:comment "A blockchain built using Substrate, the same technology used to build Polkadot." ;
-    ponto:hasNetType ponto:mainnet .
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParaId 2023 .
+ponto:Ganshiro a ponto:Parachain ;
+    rdfs:label "Ganshiro" ;
+    rdfs:comment "A blockchain built using Substrate, the same technology used to build Polkadot." ;
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParaId 2024 .
+ponto:Picasso a ponto:Parachain ;
+    rdfs:label "Picasso" ;
+    rdfs:comment "A blockchain built using Substrate, the same technology used to build Polkadot." ;
+    ponto:hasNetType ponto:mainnet ;
+    ponto:hasParaId 2087 .
 # testnets
 ponto:Westmint a ponto:Blockchain ;
     rdfs:label "Westmint" ;
