@@ -211,7 +211,7 @@ ponto:Fellowship a owl:Class ;
     rdfs:subClassOf ponto:Component .
 ponto:Origin a owl:Class ;
     rdfs:label "Origin" ;
-    rdfs:comment "The initiator of an extrinsic. A simple origin would be the account that is sending a token to another account. Polkadot also supports more complex origin types, such as the root origin, from which privileged functions can be called. In OpenGov, each origin has a fixed set of privileges. When making a proposal, it is important to choose the origin that has the privilege to execute the referenda." ;
+    rdfs:comment "In OpenGov, each origin has a fixed set of privileges. When making a proposal, it is important to choose the origin that has the privilege to execute the referenda." ;
     rdfs:subClassOf ponto:Component .
 ponto:Track a owl:Class ;
     rdfs:label "Track" ;
@@ -221,10 +221,6 @@ ponto:WhitelistPallet a owl:Class ;
     rdfs:label "Whitelist Pallet" ;
     rdfs:comment "Allows one Origin to escalate the privilege level of another Origin for a certain operation. In terms of OpenGov, it allows the Fellowship to authorise a new origin (which we will call Whitelisted-Root) to be executed with Root-level privileges." ;
     rdfs:subClassOf ponto:Pallet .
-ponto:VotingPower a owl:Class ;
-    rdfs:label "Voting Power" ;
-    rdfs:comment "In the Polkadot multichain ecosystem, voting power is distributed among different entities based on their role and stake in the network." ;
-    rdfs:subClassOf owl:Thing .
 ponto:VoteDelegation a owl:Class ;
     rdfs:label "Vote Delegation" ;
     rdfs:comment "Ability to delegate voting power to another voter in the system. This works with conviction voting, allowing users to lock up tokens in order to increase the level of voting power their delegates wield on their behalf." ;
@@ -233,7 +229,34 @@ ponto:MultiroleDelegation a owl:Class ;
     rdfs:label "Multirole Delegation" ;
     rdfs:comment "Allows users to specify a different delegate for every class of referendum in the system. If users do not want to delegate for a particular class of referendum then they can also retain direct control for that class." ;
     rdfs:subClassOf ponto:VoteDelegation .
+# Governance entities
+ponto:Proposal a owl:Class ;
+    rdfs:label "Proposal" ;
+    rdfs:comment "A potential function call to be voted on in a referendum. Proposals modify the behavior of the Polkadot network, from minor parameter tuning up to replacing the runtime code." ;
+    rdfs:subClassOf owl:Thing .
+ponto:Bounty a owl:Class ;
+    rdfs:label "Bounty" ;
+    rdfs:comment "A mechanism which works in some sense as the reverse of a Treasury Proposal, allowing the Polkadot Council to indicate that there is a need to do some task for the Polkadot network and allowing users to receive DOT in return for working on that task." ;
+    rdfs:subClassOf ponto:GovernanceComponent .
+ponto:Curator a owl:Class ;
+    rdfs:label "Curator" ;
+    rdfs:comment "A person, group, or other entity charged with judging and verifying the successful completion of a Bounty." ;
+    rdfs:subClassOf owl:Thing .
+ponto:Referendum a owl:Class ;
+    rdfs:label "Referendum" ;
+    rdfs:comment "A vote on whether or not a proposal should be accepted by the network. Referenda may be initiated by the Governance Council (gov1) or by the public (OpenGov), by a member of the public, or as the result of a previous proposal. Stakeholders vote on referenda, weighted by both the size of their stake (i.e. number of DOT held) and the amount of time they are willing to lock their tokens." ;
+    rdfs:subClassOf owl:Thing .
+ponto:Motion a owl:Class ;
+    rdfs:label "Motion" ;
+    rdfs:comment "A motion is essentially a 'referendum' or 'decision' being considered by the Council (Governance v1). The Council can vote on motions like approving Treasury Proposals or making proposals for the community to vote on." ;
+    rdfs:subClassOf ponto:Referendum .
+ponto:Vote a owl:Class ;
+    rdfs:label "Vote" ;
+    rdfs:comment "A means by which a preference is made known in the governance mechanism." ;
+    rdfs:subClassOf owl:Thing .
+# relationships
 ponto:hasVotingPower a owl:ObjectProperty ;
+    rdfs:comment "In the Polkadot multichain ecosystem, voting power is distributed among different entities based on their role and stake in the network." ;
     rdfs:domain ponto:AccountHolder ;
     rdfs:domain ponto:Node ;
     rdfs:range xsd:boolean .
@@ -325,31 +348,6 @@ ponto:hasConfirmPeriod rdfs:subPropertyOf [
         owl:inverseOf owl:hasValue ;
         owl:hasValue ponto:confirmationPeriod
 ] .
-# Governance entities
-ponto:Proposal a owl:Class ;
-    rdfs:label "Proposal" ;
-    rdfs:comment "A potential function call to be voted on in a referendum. Proposals modify the behavior of the Polkadot network, from minor parameter tuning up to replacing the runtime code." ;
-    rdfs:subClassOf owl:Thing .
-ponto:Bounty a owl:Class ;
-    rdfs:label "Bounty" ;
-    rdfs:comment "A mechanism which works in some sense as the reverse of a Treasury Proposal, allowing the Polkadot Council to indicate that there is a need to do some task for the Polkadot network and allowing users to receive DOT in return for working on that task." ;
-    rdfs:subClassOf ponto:GovernanceComponent .
-ponto:Curator a owl:Class ;
-    rdfs:label "Curator" ;
-    rdfs:comment "A person, group, or other entity charged with judging and verifying the successful completion of a Bounty." ;
-    rdfs:subClassOf owl:Thing .
-ponto:Referendum a owl:Class ;
-    rdfs:label "Referendum" ;
-    rdfs:comment "A vote on whether or not a proposal should be accepted by the network. Referenda may be initiated by the Governance Council (gov1) or by the public (OpenGov), by a member of the public, or as the result of a previous proposal. Stakeholders vote on referenda, weighted by both the size of their stake (i.e. number of DOT held) and the amount of time they are willing to lock their tokens." ;
-    rdfs:subClassOf owl:Thing .
-ponto:Motion a owl:Class ;
-    rdfs:label "Motion" ;
-    rdfs:comment "A motion is essentially a 'referendum' or 'decision' being considered by the Council. The Council can vote on motions like approving Treasury Proposals or making proposals for the community to vote on." ;
-    rdfs:subClassOf ponto:Referendum .
-ponto:Vote a owl:Class ;
-    rdfs:label "Vote" ;
-    rdfs:comment "A means by which a preference is made known in the governance mechanism." ;
-    rdfs:subClassOf owl:Thing .
 ponto:leadin a xsd:string ;
     rdfs:comment "The first period in the track timeline structure. Until the proposals are in the lead-in period, they remain undecided." ;
     rdfs:label "Lead-in" .
@@ -378,9 +376,15 @@ ponto:voteDelegatedBy a owl:ObjectProperty ;
     owl:inverseOf ponto:delegatesVote ;
     rdfs:domain ponto:Vote ;
     rdfs:range ponto:Account .
-ponto:hasVoter a owl:ObjectProperty ;
+ponto:hasVoterAccount a owl:ObjectProperty ;
     rdfs:domain ponto:Vote ;
     rdfs:range ponto:Account .
+ponto:hasVote a owl:ObjectProperty ;
+    rdfs:domain ponto:Referendum ;
+    rdfs:range ponto:Vote .
+ponto:hasReferendumTrack a owl:ObjectProperty ;
+    rdfs:domain ponto:Referendum ;
+    rdfs:range ponto:Track .
 ponto:hasAmount a owl:DatatypeProperty ;
     rdfs:domain ponto:Vote ;
     rdfs:range xsd:decimal .
@@ -391,27 +395,25 @@ ponto:hasDecision a owl:DatatypeProperty ;
     rdfs:domain ponto:Vote ;
     rdfs:range xsd:string .
 ponto:aye a xsd:string ;
-    rdfs:label "aye" ;
-    rdfs:comment "a positive vote casting." .
+    rdfs:label "Aye" ;
+    rdfs:comment "'Aye' in favor of a referendum." .
 ponto:nay a xsd:string ;
-    rdfs:label "nay" ;
-    rdfs:comment "a negative vote casting." .
-ponto:abstained a xsd:string ;
-    rdfs:label "abstained" ;
-    rdfs:comment "a neutral vote casting." .
+    rdfs:label "Nay" ;
+    rdfs:comment "casting a vote against a referendum." .
+ponto:split a xsd:string ;
+    rdfs:label "Split" ;
+    rdfs:comment "a voter can split their voting power into both options" .
+ponto:abstain a xsd:string ;
+    rdfs:label "Abstain" ;
+    rdfs:comment "the vote will count for the referendum support (total voting balance) but not for its approval (voting power ratio of 'Ayes' or 'Nays')" .
 ponto:hasDecision rdfs:subPropertyOf [
         rdf:type owl:FunctionalProperty ;
         owl:inverseOf owl:hasValue ;
-        owl:hasValue ponto:aye, ponto:nay, ponto:abstained
+        owl:hasValue ponto:aye, ponto:nay, ponto:split, ponto:abstain
 ] .
 ponto:initiateProposal a owl:ObjectProperty ;
     rdfs:domain ponto:StakeHolder ;
     rdfs:range ponto:Proposal .
-ponto:voting a owl:ObjectProperty ;
-    rdfs:label "Voting" ;
-    rdfs:comment "The process of stakeholders determining whether or not a referendum should pass. Votes are weighted both by the number of DOT that the stakeholder account controls and the amount of time they are willing to lock their DOT." ;
-    rdfs:domain ponto:StakeHolder ;
-    rdfs:range ponto:Referendum .
 ponto:tabling a owl:ObjectProperty ;
     rdfs:label "Tabling" ;
     rdfs:comment "In Polkadot governance, bringing a proposal to a vote via referendum. Note that this is the British meaning of 'tabling', which is different from the US version, which means 'to postpone' a measure." ;
@@ -687,6 +689,9 @@ ponto:hasTransferBeneficiary a owl:ObjectProperty ;
 ponto:hasExtrinsicId a owl:DatatypeProperty ;
     rdfs:domain ponto:Extrinsic ;
     rdfs:range xsd:string .
+ponto:hasExtrinsic a owl:ObjectProperty ;
+    rdfs:domain ponto:Block ;
+    rdfs:range ponto:Extrinsic .
 ponto:hasXCMTransfer a owl:ObjectProperty ;
     rdfs:domain ponto:Extrinsic ;
     rdfs:range ponto:XCMTransfer .

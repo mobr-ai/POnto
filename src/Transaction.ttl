@@ -65,6 +65,10 @@ ponto:hasExtrinsicId a owl:DatatypeProperty ;
     rdfs:domain ponto:Extrinsic ;
     rdfs:range xsd:string .
 
+ponto:hasExtrinsic a owl:ObjectProperty ;
+    rdfs:domain ponto:Block ;
+    rdfs:range ponto:Extrinsic .
+
 ponto:hasXCMTransfer a owl:ObjectProperty ;
     rdfs:domain ponto:Extrinsic ;
     rdfs:range ponto:XCMTransfer .
